@@ -85,18 +85,42 @@
 	    color: white;
 	    padding: 1.5rem;
 	}
+
+	#sidenav2{
+	    right: 262px;
+	    z-index: 100;
+	    width: unset;
+	    height: 264px;
+	    min-height: unset;
+	    padding: 19px 18px 0px 18px;
+	    top: 50%;
+	    transform: translate(0,-50%);
+	    color: lightgrey;
+	    border-radius: 100px;
+	    overflow: hidden;
+	    text-align: center;
+
+	}
+
+	#sidenav2 i {
+	    font-size: 35px;
+	    margin: 30px 0;
+	    display: block;
+       }
 	</style>
 </head>
   <body>
 
-  <div id="client-pass-modal" class="modal-wrapper">
-	<div class="modal-body">
-		<div id="client-pass-ipg" class="input-group input-group-alternative">
-			<input class="form-control" placeholder="Type Password" type="text">
-		</div>
-		
+  <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
+	<div class="container-fluid">
 	</div>
-</div>
+  </nav>
+
+  <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">
+	<i class="fas fas-love"></i>
+	<i class="fas fas-love"></i>
+	<i class="fas fas-love"></i>
+  </nav>
   
   <!-- Main content -->
   <div class="main-content">
@@ -155,7 +179,7 @@
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <h1 class="text-center text-white mb-5 mt-0">Choose Your Client</h1> 
+      <h1 class="text-center text-white mb-5 mt-0">Select Your Shoe</h1> 
     </div>
   </div>
 </div>
@@ -163,53 +187,25 @@
     <div class="container-fluid mt--7">
       <div class="row">
        
-        <div onclick="handleBCardClick(1)" class="col-xl-4 brand-card">
+        <div onclick="" class="col-xl-4 brand-card">
           <div class="card shadow">
-            <div class="card-header bg-gradient-default">
-              <div class="row align-items-center">
-                <div class="col">
-                  
-                  <h3 class="mb-0 text-center text-white">Nike</h3>
-                </div>
-              </div>
-            </div>
-            <div style="background-image: url('./assets/nike-logo.png')" class="card-body">
+            
+            <div style="background-image: url('./assets/shoe-type-1.png')" class="card-body">
              
             </div>
           </div>
         </div>
 
-	<div class="col-xl-4 brand-card">
+	<div onclick="" class="col-xl-4 brand-card">
           <div class="card shadow">
-            <div class="card-header bg-gradient-default">
-              <div class="row align-items-center">
-                <div class="col">
-                  
-                  <h3 class="mb-0 text-center text-white">Nike</h3>
-                </div>
-              </div>
-            </div>
-            <div style="background-image: url('./assets/nike-logo.png')" class="card-body">
+            
+            <div style="background-image: url('./assets/shoe-type-2.png')" class="card-body">
              
             </div>
           </div>
         </div>
 
-	<div class="col-xl-4 brand-card">
-          <div class="card shadow">
-            <div class="card-header bg-gradient-default">
-              <div class="row align-items-center">
-                <div class="col">
-                  
-                  <h3 class="mb-0 text-center text-white">Nike</h3>
-                </div>
-              </div>
-            </div>
-            <div style="background-image: url('./assets/nike-logo.png')" class="card-body">
-             
-            </div>
-          </div>
-        </div>
+	
 
 	
 
