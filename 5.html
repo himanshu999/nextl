@@ -87,7 +87,7 @@
 	}
 
 	#sidenav2{
-	    right: 262px;
+	    right: 362px;
 	    z-index: 100;
 	    width: unset;
 	    height: 264px;
@@ -121,12 +121,53 @@
 	.mat-thumb {
 	    border-radius: 50%;
 	    border: 1px solid #DDD;
-	    margin: auto;
+	    margin: 0px auto 4px auto;
 	    padding: 0;
 	    padding-bottom: 0;
 	    padding-top: 100%;
 	    background-position: center center;
 	    background-size: cover;
+	    cursor:pointer;
+	    transition: box-shadow 0.3s ease-in-out;
+	}
+
+	.mat-thumb:hover{
+		box-shadow: 1px 1px 9px 1px rgb(119 116 228 / 63%);
+		
+	}
+
+	.mat-thumb + span{
+	
+	    font-size: 0.8rem;
+	    text-align: center;
+	    /* margin: 71rem 0; */
+	    color: #6d6a6a;
+	    font-weight: 600;
+	    text-transform: capitalize;
+
+	}
+
+	.mat-thumb-hldr{
+
+	    margin-bottom: 1.5rem;
+
+	}
+
+	
+	.navbar-vertical.navbar-expand-md {
+		max-width: 350px !important; 
+	}
+
+	
+	.navbar-vertical.navbar-expand-md.fixed-right+.main-content {
+	    margin-right: 350px !important;
+	}
+
+	#mat-list .nav-link{
+
+	    color: #333;
+	    font-size: 1.1rem;
+	    font-weight:600;
 	}
 	
 	</style>
@@ -136,18 +177,31 @@
   <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
 	<div class="">
 		<button style="width:100%" class="btn btn-primary mb-4">Save</button>
-		<ul class="navbar-nav">
+		<ul id="mat-list" class="navbar-nav">
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
 			    Leather
 			  </a>
 			  <div class="container">
 			  <div class="row">
-				<div class="col-xl-6">
+				<div class="col-xl-4 text-center mat-thumb-hldr">
 					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
 				</div>
-				<div class="col-xl-6">
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
 					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
 				</div>
 				
 			  </div>
@@ -157,16 +211,89 @@
 			  <a class="nav-link" href="#">
 			    Fabric
 			  </a>
+			  <div class="container">
+			  <div class="row">
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+				
+			  </div>
+			  </div>
 			</li>
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
 			    Synthetic
 			  </a>
+
+			<div class="container">
+			  <div class="row">
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+				
+			  </div>
+			  </div>
 			</li>
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
 			    Polyester
 			  </a>
+			  <div class="container">
+			  <div class="row">
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+
+				<div class="col-xl-4 text-center mat-thumb-hldr">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+					<span>Type 1</span>
+				</div>
+				
+			  </div>
+			  </div>
 			</li>
 			
       		</ul>
