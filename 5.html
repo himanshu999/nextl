@@ -92,7 +92,7 @@
 	    width: unset;
 	    height: 264px;
 	    min-height: unset;
-	    padding: 19px 18px 0px 18px;
+	    padding: 19px 14px 0px 14px;
 	    top: 50%;
 	    transform: translate(0,-50%);
 	    color: lightgrey;
@@ -106,20 +106,77 @@
 	    font-size: 35px;
 	    margin: 30px 0;
 	    display: block;
+	    cursor:pointer;
+	    transition: all 0.3s ease-in-out;
        }
+
+	#sidenav2 i.selected{
+	   color: blueviolet;	
+	}
+
+	#sidenav2 i:hover{
+	   color: blueviolet;
+	}
+
+	.mat-thumb {
+	    border-radius: 50%;
+	    border: 1px solid #DDD;
+	    margin: auto;
+	    padding: 0;
+	    padding-bottom: 0;
+	    padding-top: 100%;
+	    background-position: center center;
+	    background-size: cover;
+	}
+	
 	</style>
 </head>
   <body>
 
   <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
-	<div class="container-fluid">
+	<div class="">
+		<button style="width:100%" class="btn btn-primary mb-4">Save</button>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+			  <a class="nav-link" href="#">
+			    Leather
+			  </a>
+			  <div class="container">
+			  <div class="row">
+				<div class="col-xl-6">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+				</div>
+				<div class="col-xl-6">
+					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
+				</div>
+				
+			  </div>
+			  </div>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#">
+			    Fabric
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#">
+			    Synthetic
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#">
+			    Polyester
+			  </a>
+			</li>
+			
+      		</ul>
 	</div>
   </nav>
 
   <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">
-	<i class="fas fas-love"></i>
-	<i class="fas fas-love"></i>
-	<i class="fas fas-love"></i>
+	<i class="fas fa-tshirt selected"></i>
+	<i class="fas fa-heart"></i>
+	<i class="fas fa-heart"></i>
   </nav>
   
   <!-- Main content -->
