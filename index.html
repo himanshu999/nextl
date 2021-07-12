@@ -16,6 +16,10 @@
   <!-- Argon CSS -->
   <link type="text/css" href="./assets/argon.min.css" rel="stylesheet">
   <style type="text/css">
+	body{
+		min-height:100vh;
+	}
+
 	#bg-card .card-body{
 	    background-image: url(./assets/shoe1.png);
 	    height: 500px;
@@ -23,6 +27,149 @@
 	    background-size: contain;
 	    background-repeat: no-repeat;
 	}
+
+	.brand-card{
+		text-align:center;
+		cursor: pointer;
+
+	}
+
+	.brand-card .card-body{
+	
+	    background-position: center center;
+	    background-size:contain;
+	    background-repeat: no-repeat;
+	    padding-top:100%;
+	    padding-bottom: 0;
+
+	}
+
+	.brand-card .card.shadow{
+	 	width:80%;
+		margin:auto;
+		border: none;
+	}
+
+	.modal-wrapper {
+	    position: absolute;
+	    top: 0;
+	    width: 100vw;
+	    height: 100vh;
+	    z-index: -1;
+	    background: #000000ad;
+	    backdrop-filter: blur(8px);
+	    transition: opacity 0.3s ease-in-out;
+	    opacity: 0;
+	}
+	
+	.modal-body{
+	   margin-top: 30%;
+           text-align: center;
+
+	}
+
+	#client-pass-ipg{	
+	
+	    width: 18rem;
+	    text-align: center;
+	    margin: auto;
+
+	}
+
+	#client-pass-ipg .form-control{
+	    border-radius: 30px;
+	    background: transparent;
+	    border: 2px solid #bfbebe;
+	    font-size: 1.1rem;
+	    text-align: center;
+	    color: white;
+	    padding: 1.5rem;
+	}
+
+	#sidenav2{
+	    right: 362px;
+	    z-index: 100;
+	    width: unset;
+	    height: 264px;
+	    min-height: unset;
+	    padding: 19px 14px 0px 14px;
+	    top: 50%;
+	    transform: translate(0,-50%);
+	    color: lightgrey;
+	    border-radius: 100px;
+	    overflow: hidden;
+	    text-align: center;
+
+	}
+
+	#sidenav2 i {
+	    font-size: 35px;
+	    margin: 30px 0;
+	    display: block;
+	    cursor:pointer;
+	    transition: all 0.3s ease-in-out;
+       }
+
+	#sidenav2 i.selected{
+	   color: blueviolet;	
+	}
+
+	#sidenav2 i:hover{
+	   color: blueviolet;
+	}
+
+	.mat-thumb {
+	    border-radius: 50%;
+	    border: 1px solid #DDD;
+	    margin: 0px auto 4px auto;
+	    padding: 0;
+	    padding-bottom: 0;
+	    padding-top: 100%;
+	    background-position: center center;
+	    background-size: cover;
+	    cursor:pointer;
+	    transition: box-shadow 0.3s ease-in-out;
+	}
+
+	.mat-thumb:hover{
+		box-shadow: 1px 1px 9px 1px rgb(119 116 228 / 63%);
+		
+	}
+
+	.mat-thumb + span{
+	
+	    font-size: 0.8rem;
+	    text-align: center;
+	    /* margin: 71rem 0; */
+	    color: #6d6a6a;
+	    font-weight: 600;
+	    text-transform: capitalize;
+
+	}
+
+	.mat-thumb-hldr{
+
+	    margin-bottom: 1.5rem;
+
+	}
+
+	
+	.navbar-vertical.navbar-expand-md {
+		max-width: 350px !important; 
+	}
+
+	
+	.navbar-vertical.navbar-expand-md.fixed-right+.main-content {
+	    margin-right: 350px !important;
+	}
+
+	#mat-list .nav-link{
+
+	    color: #333;
+	    font-size: 1.1rem;
+	    font-weight:600;
+	}
+	
 	</style>
 </head>
   <body>
