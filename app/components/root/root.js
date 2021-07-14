@@ -1,0 +1,7 @@
+spa.$('root', {
+  require: 'dataStore',
+
+});
+
+
+

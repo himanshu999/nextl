@@ -1,0 +1,5 @@
+spa.$('clientListing', {
+  require: 'dataStore',
+
+});
+
