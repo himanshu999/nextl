@@ -8,15 +8,10 @@ spa.$('shoesListing', {
 
 spa.$extend('shoesListing', {
 
-  getShoes: function() {
-	console.log('dddd local2');
-	return app.dataStore.clients;
-
-   }, 
-
    handleShoeCardClick : function (id) {
 	
-	
+	spa.$hide('shoesListing');
+	spa.$show('customizerView');
 	
    }
   
