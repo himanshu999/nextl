@@ -123,6 +123,7 @@
 									child.material.color.g = Math.random(100);
 									child.material.color.b = Math.random(100);
 									child.material.needsUpdate = true;
+									console.log(child.name);
 									
 
 								}
@@ -231,7 +232,7 @@
 		
 			function createMaterials() { 
 				
-				let testMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5, metalness: 0.3});
+				let testMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5, metalness: 0.2});
 
 				let texture = textureLoader.load('./assets/leather2.jpg');
 
@@ -261,6 +262,38 @@
 				
 			
 				materials.push(testMaterial);
+
+
+				texture = textureLoader.load('./assets/leather.jpg');
+
+				texture.wrapS = THREE.RepeatWrapping;
+				texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set( 16, 16 );
+
+
+				normalTexture = textureLoader.load('./assets/leather_normal.jpg');
+
+				normalTexture.wrapS = THREE.RepeatWrapping;
+				normalTexture.wrapT = THREE.RepeatWrapping;
+				normalTexture.repeat.set( 16, 16 );
+
+				aoTexture = textureLoader.load('./assets/leather.jpg');
+
+				aoTexture.wrapS = THREE.RepeatWrapping;
+				aoTexture.wrapT = THREE.RepeatWrapping;
+				aoTexture.repeat.set( 16, 16 ); 
+
+
+				testMaterial = new THREE.MeshStandardMaterial({roughness: 0.5, metalness: 0.2});
+				testMaterial.map = texture;
+				testMaterial.normalMap = normalTexture;
+				testMaterial.normalScale = new THREE.Vector2(0.8, 0.8);
+				testMaterial.aoMap = aoTexture;
+				testMaterial.aoMapIntensity = 1.0;
+				
+				materials.push(testMaterial);
+
+				
 
 				console.log(materials);
 			
