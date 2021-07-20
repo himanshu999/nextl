@@ -223,22 +223,41 @@
 
 					intersects[0].object.material.copy(materials[0]);
 
+					intersects[0].object.material.needsUpdate = true;
+
 				}
 			}
 
 		
 			function createMaterials() { 
 				
-				let testMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.7, metalness: 0.3});
+				let testMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5, metalness: 0.3});
 
-				let texture = textureLoader.load('./assets/leather.jpg');
+				let texture = textureLoader.load('./assets/leather2.jpg');
 
 				texture.wrapS = THREE.RepeatWrapping;
 				texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set( 4, 4 );
+				texture.repeat.set( 16, 16 );
+
+
+				let normalTexture = textureLoader.load('./assets/leather2_normal.jpg');
+
+				normalTexture.wrapS = THREE.RepeatWrapping;
+				normalTexture.wrapT = THREE.RepeatWrapping;
+				normalTexture.repeat.set( 16, 16 );
+
+				let aoTexture = textureLoader.load('./assets/leather2.jpg');
+
+				aoTexture.wrapS = THREE.RepeatWrapping;
+				aoTexture.wrapT = THREE.RepeatWrapping;
+				aoTexture.repeat.set( 16, 16 ); 
+
 
 				testMaterial.map = texture;
-				
+				//testMaterial.normalMap = normalTexture;
+				testMaterial.normalScale = new THREE.Vector2(0.001, 0.001);
+				testMaterial.aoMap = aoTexture;
+				testMaterial.aoMapIntensity = 0.3;
 				
 			
 				materials.push(testMaterial);
