@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Entrant Technologies</title>
+		<title>NextL Viewer</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,6 +103,8 @@
 
 				controls.minDistance = 100;
 				controls.maxDistance = 500;
+
+				const shoeLaceMaterial = new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.8, metalness: 0.1 });
 				
 
 				//controls.maxPolarAngle = Math.PI / 2;
@@ -122,8 +124,13 @@
 									child.material.color.r = Math.random(100);
 									child.material.color.g = Math.random(100);
 									child.material.color.b = Math.random(100);
+
+									if(child.name.startsWith('pasted__pPlane')) child.material = shoeLaceMaterial;
+									
 									child.material.needsUpdate = true;
 									console.log(child.name);
+
+									
 									
 
 								}
@@ -222,7 +229,7 @@
 
 					}, 500);*/
 
-					intersects[0].object.material.copy(materials[0]);
+					intersects[0].object.material.copy(materials[Math.floor(Math.random() * (3))]);
 
 					intersects[0].object.material.needsUpdate = true;
 
@@ -238,27 +245,27 @@
 
 				texture.wrapS = THREE.RepeatWrapping;
 				texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set( 16, 16 );
+				texture.repeat.set( 20, 20 );
 
 
 				let normalTexture = textureLoader.load('./assets/leather2_normal.jpg');
 
 				normalTexture.wrapS = THREE.RepeatWrapping;
 				normalTexture.wrapT = THREE.RepeatWrapping;
-				normalTexture.repeat.set( 16, 16 );
+				normalTexture.repeat.set( 20, 20 );
 
 				let aoTexture = textureLoader.load('./assets/leather2.jpg');
 
 				aoTexture.wrapS = THREE.RepeatWrapping;
 				aoTexture.wrapT = THREE.RepeatWrapping;
-				aoTexture.repeat.set( 16, 16 ); 
+				aoTexture.repeat.set( 20, 20 ); 
 
 
 				testMaterial.map = texture;
 				//testMaterial.normalMap = normalTexture;
 				testMaterial.normalScale = new THREE.Vector2(0.001, 0.001);
 				testMaterial.aoMap = aoTexture;
-				testMaterial.aoMapIntensity = 0.3;
+				testMaterial.aoMapIntensity = 0.6;
 				
 			
 				materials.push(testMaterial);
@@ -268,20 +275,50 @@
 
 				texture.wrapS = THREE.RepeatWrapping;
 				texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set( 16, 16 );
+				texture.repeat.set( 18, 18 );
 
 
 				normalTexture = textureLoader.load('./assets/leather_normal.jpg');
 
 				normalTexture.wrapS = THREE.RepeatWrapping;
 				normalTexture.wrapT = THREE.RepeatWrapping;
-				normalTexture.repeat.set( 16, 16 );
+				normalTexture.repeat.set( 18, 18 );
 
-				aoTexture = textureLoader.load('./assets/leather.jpg');
+				aoTexture = textureLoader.load('./assets/leather_ao.jpg');
 
 				aoTexture.wrapS = THREE.RepeatWrapping;
 				aoTexture.wrapT = THREE.RepeatWrapping;
-				aoTexture.repeat.set( 16, 16 ); 
+				aoTexture.repeat.set( 18, 18 ); 
+
+
+				testMaterial = new THREE.MeshStandardMaterial({color: 0xeeeeee, roughness: 0.5, metalness: 0.2});
+				testMaterial.map = texture;
+				testMaterial.normalMap = normalTexture;
+				testMaterial.normalScale = new THREE.Vector2(0.8, 0.8);
+				testMaterial.aoMap = aoTexture;
+				testMaterial.aoMapIntensity = 1.0;
+				
+				materials.push(testMaterial);
+
+
+				texture = textureLoader.load('./assets/leather3.jpg');
+
+				texture.wrapS = THREE.RepeatWrapping;
+				texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set( 14, 14 );
+
+
+				normalTexture = textureLoader.load('./assets/leather3_normal.jpg');
+
+				normalTexture.wrapS = THREE.RepeatWrapping;
+				normalTexture.wrapT = THREE.RepeatWrapping;
+				normalTexture.repeat.set( 14, 14 );
+
+				aoTexture = textureLoader.load('./assets/leather3_ao.jpg');
+
+				aoTexture.wrapS = THREE.RepeatWrapping;
+				aoTexture.wrapT = THREE.RepeatWrapping;
+				aoTexture.repeat.set( 14, 14 ); 
 
 
 				testMaterial = new THREE.MeshStandardMaterial({roughness: 0.5, metalness: 0.2});
