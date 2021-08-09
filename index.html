@@ -197,6 +197,42 @@
   <script src="http://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"  ></script>
   <script src="http://cdn.jsdelivr.net/gh/sucom/SPA.js/dist/spa-bundle.min.js" ></script>
   
+	
+  <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+
+
+  <script>
+	  
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyC2FfpALz8l9XSIxFYdMe5pQ_XzOfhfcYU",
+	    authDomain: "nextl-5bff0.firebaseapp.com",
+	    projectId: "nextl-5bff0",
+	    storageBucket: "nextl-5bff0.appspot.com",
+	    messagingSenderId: "801014308314",
+	    appId: "1:801014308314:web:2653b4b23cf76b15e274e3"
+	  };
+	  
+	  firebase.initializeApp(firebaseConfig);
+	  var firebaseDB = firebase.firestore();
+	
+
+	  const saveMaterial = (mat) => { 
+		console.log(mat);
+
+		firebaseDB.collection("materials").add({...mat})
+		.then((docRef) => {
+		    console.log("Document written with ID: ", docRef.id);
+		})
+		.catch((error) => {
+		    console.error("Error adding document: ", error);
+		});
+
+	  }
+
+	  window.saveMaterial = saveMaterial;
+  </script>
+
   <script>
   var appData = {
     clients: {

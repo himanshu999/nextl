@@ -326,9 +326,19 @@
 				console.log(materials);
 				
 				setTimeout(() => {
-
-					console.log(JSON.stringify(materials[0].toJSON()));
+	
+					const materialJSON = JSON.stringify(materials[0].toJSON());
+					
+					const mat = {
+					name: 'Test 01',
+					category: 'Leather',
+					materialJSON,
+					};
+		
+					parent.window.saveMaterial(mat);
 				}, 1000);
+
+				
 				
 			
 			}
