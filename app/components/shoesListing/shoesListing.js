@@ -21,6 +21,9 @@ spa.$extend('shoesListing', {
 	  
 
 	});
+	setTimeout(() => {
+		window.frames[0].loadMaterials();
+	}, 500);
 	//spa.$show('customizerView');
 	
    }
