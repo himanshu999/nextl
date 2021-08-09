@@ -1,6 +1,8 @@
 spa.$('customizerView', {
   require: 'dataStore',
 
+  target: '#spaCompContainer_header_1',
+
   getImage: function(obj) {
 	
 	if(obj.materialJSON !== ""){
