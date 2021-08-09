@@ -215,7 +215,7 @@
 	  
 	  firebase.initializeApp(firebaseConfig);
 	  var firebaseDB = firebase.firestore();
-	
+	  firebaseDB.settings({ experimentalForceLongPolling: true });
 
 	  const saveMaterial = (mat) => { 
 		console.log(mat);
@@ -240,7 +240,14 @@
 		appData.materials.push(doc.data());
 	    });
 
-	    spa.$render('customizerView');
+	  spa.$render('customizerView');  
+	  
+	  setTimeout(() => {
+		window.frames[0].loadMaterials();
+	  }, 500);
+	  
+
+	    
 	  }); 
   </script>
 

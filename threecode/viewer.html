@@ -56,7 +56,7 @@
 			let materials = [];
 
 			init();
-			//render(); // remove when using next line for animation loop (requestAnimationFrame)
+			
 			animate();
 
 			function init() {
@@ -148,7 +148,7 @@
 
 
 				textureLoader = new THREE.TextureLoader();
-				createMaterials();
+				//createMaterials();
 				
 
 				raycaster = new THREE.Raycaster();
@@ -166,8 +166,8 @@
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
-				adjustedCanvasWidth = renderer.domElement.width / window.devicePixelRatio;
-				adjustedCanvasHeight = renderer.domElement.height / window.devicePixelRatio;
+				//adjustedCanvasWidth = renderer.domElement.width / window.devicePixelRatio;
+				//adjustedCanvasHeight = renderer.domElement.height / window.devicePixelRatio;
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -220,9 +220,9 @@
 
 					selectedPart = intersects[0].object; 
 
-					selectedPart.material.copy(materials[Math.floor(Math.random() * (3))]);
+					//selectedPart.material.copy(materials[Math.floor(Math.random() * (3))]);
 
-					selectedPart.material.needsUpdate = true;
+					//selectedPart.material.needsUpdate = true;
 
 				}
 			}
@@ -325,18 +325,18 @@
 
 				console.log(materials);
 				
-				/*setTimeout(() => {
+				setTimeout(() => {
 	
-					const materialJSON = JSON.stringify(materials[0].toJSON());
+					const materialJSON = JSON.stringify(materials[2].toJSON());
 					
 					const mat = {
-					name: 'Test 01',
+					name: 'Test 03',
 					category: 'Leather',
 					materialJSON,
 					};
 		
 					parent.window.saveMaterial(mat);
-				}, 1000); */
+				}, 1000); 
 
 				
 				
@@ -346,11 +346,27 @@
 
 			const changeMaterial = (mat) => { 
 					
-				let loadedTextures = {};
-
 				
+				const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
+				
+				selectedPart.material.copy(material);
+				
+				selectedPart.material.needsUpdate = true;
+				
+			}
 
-				mat.textures.forEach((tex) => { 
+			const loadMaterials = () => {
+
+				materials = [];
+				
+				
+				window.parent.appData.materials.forEach((mat) => {
+				
+				   mat = JSON.parse(mat.materialJSON);
+		                   let loadedTextures = {};	
+				   
+				   if(mat.textures)		
+				   mat.textures.forEach((tex) => { 
 					console.log(tex);	
 					const image = mat.images.find( (img) => (img.uuid === tex.image) );
 										
@@ -366,18 +382,24 @@
 				});
 
 				materialLoader.setTextures(loadedTextures);
+				
+				let material = materialLoader.parse(mat);
+				material.uuid = mat.uuid;
+				console.log(mat);
+				console.log(material);
+				materials.push(material);	
 
-				const material = materialLoader.parse(mat);
-				
-				selectedPart.material.copy(material);
-				
-				selectedPart.material.needsUpdate = true;
+				});
+
+
+				console.log(materials);
+
 				
 			}
 
 			window.changeMaterial = changeMaterial;
 
-			
+			window.loadMaterials = loadMaterials;			
 			
 
 		</script>
