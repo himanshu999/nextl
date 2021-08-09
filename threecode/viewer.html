@@ -28,7 +28,7 @@
 			
 		</style>
 		<script>
-		 var camerag;
+		 var camerag, selectedPart;
 		</script>
 	</head>
 
@@ -49,9 +49,9 @@
 			let camera, controls, scene, renderer, pmremGenerator;
 			
 			let raycaster, mouse = {};
-			let model;
+			let model, selectedPart;
 		
-			let textureLoader;
+			let textureLoader, materialLoader;
 
 			let materials = [];
 
@@ -105,8 +105,10 @@
 				//controls.maxPolarAngle = Math.PI / 2;
 
 
-
+				materialLoader = new THREE.MaterialLoader();
+				
 				const loader = new GLTFLoader();
+				
 				loader.load( './assets/shoe.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
@@ -154,6 +156,8 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				window.addEventListener('pointerdown', raycast);
+	
+				window.model = model;
 
 			}
 
@@ -188,16 +192,6 @@
 			}
 
 		
-			function changeTexture(textureName){
-				
-				const texture = new THREE.TextureLoader().load( './assets/tex1.jpeg' );
-				let mymodel = scene.children[0].children[0].children[0];
-				console.log(mymodel);	
-				//mymodel.material.color.set(0,0,0);			
-				mymodel.material.map = texture;
-				mymodel.material.needsUpdate = true;
-				
-			}
 
 
 			function raycast(event){ 
@@ -224,9 +218,11 @@
 
 					}, 500);*/
 
-					intersects[0].object.material.copy(materials[Math.floor(Math.random() * (3))]);
+					selectedPart = intersects[0].object; 
 
-					intersects[0].object.material.needsUpdate = true;
+					selectedPart.material.copy(materials[Math.floor(Math.random() * (3))]);
+
+					selectedPart.material.needsUpdate = true;
 
 				}
 			}
@@ -328,10 +324,43 @@
 				
 
 				console.log(materials);
+				
+				setTimeout(() => {
 
-				console.log(materials[0].toJSON());
+					console.log(JSON.stringify(materials[0].toJSON()));
+				}, 1000);
+				
 			
 			}
+		
+
+			const changeMaterial = (mat) => { 
+				console.log(mat);
+				materialLoader.parse(mat,
+
+					
+					function ( material ) {
+					   
+						selectedPart.material.copy(material);
+
+						selectedPart.material.needsUpdate = true;	
+					},
+
+					
+					function ( xhr ) {
+						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+					},
+
+					
+					function ( err ) {
+						console.log( err );
+					}
+				);
+
+				
+			}
+
+			window.changeMaterial = changeMaterial;
 
 			
 			

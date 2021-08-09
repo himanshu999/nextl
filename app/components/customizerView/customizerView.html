@@ -8,25 +8,13 @@
 			  </a>
 			  <div class="container">
 			  <div class="row">
-				<div class="col-xl-4 text-center mat-thumb-hldr">
+				{{#each	_global_.appData.materials}}			
+				<div onclick="{$}changeMaterial({{@index}})"class="col-xl-4 text-center mat-thumb-hldr">
 					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
+					<span>Type {{@index}}</span>
 				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
+				{{/each}}
+				
 				
 			  </div>
 			  </div>

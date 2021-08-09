@@ -5,16 +5,15 @@ spa.$('customizerView', {
 
 spa.$extend('customizerView', {
 
-  handleBCardClick: function( index ) {
+  changeMaterial: function( index ) {
     //return {'Male': 'Mr.', 'Female': 'Ms.'}[gender];
 
-	const passwordModal = document.getElementById('client-pass-modal');
-	passwordModal.style.opacity = 1.0;
-	passwordModal.style.zIndex = 100;
 	
-	console.log(app);
-	appData.currentClientIndex = index;
-	const passwordInput= document.getElementById('client-password-input');
+
+	const frame = document.getElementById('customizer-iframe');
+	
+	const mat = JSON.parse(appData.materials[index]);	
+	frame.contentWindow.changeMaterial(mat);
 	
 	
 	
