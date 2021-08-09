@@ -1,7 +1,7 @@
 spa.$('customizerView', {
   require: 'dataStore',
 
-  target: '#spaCompContainer_header_1',
+  /*target: '#spaCompContainer_header_1',
 
   getImage: function(obj) {
 	
@@ -10,7 +10,7 @@ spa.$('customizerView', {
 		return mat.images[0].url;
 	}
 	return "";
-  },
+  }, */
 
 });
 
