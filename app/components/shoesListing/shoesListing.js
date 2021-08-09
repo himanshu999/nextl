@@ -11,7 +11,17 @@ spa.$extend('shoesListing', {
    handleShoeCardClick : function (id) {
 	
 	spa.$hide('shoesListing');
-	spa.$show('customizerView');
+	//spa.$render('customizerView');
+
+	
+	spa.$render('customizerView', {
+
+	  target: '#spaCompContainer_header_1',
+
+	  
+
+	});
+	//spa.$show('customizerView');
 	
    }
   
