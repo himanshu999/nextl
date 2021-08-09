@@ -23,7 +23,7 @@ spa.$extend('shoesListing', {
 	});
 	setTimeout(() => {
 		window.frames[0].loadMaterials();
-	}, 500);
+	}, 2000);
 	//spa.$show('customizerView');
 	
    }
