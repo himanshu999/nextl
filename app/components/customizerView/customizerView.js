@@ -1,6 +1,15 @@
 spa.$('customizerView', {
   require: 'dataStore',
 
+  getImage: function(obj) {
+	
+	if(obj.materialJSON !== ""){
+		const mat = JSON.parse(obj.materialJSON);	
+		return mat.images[0].url;
+	}
+	return "";
+  },
+
 });
 
 spa.$extend('customizerView', {
@@ -12,12 +21,13 @@ spa.$extend('customizerView', {
 
 	const frame = document.getElementById('customizer-iframe');
 	
-	const mat = JSON.parse(appData.materials[index]);	
+	const mat = JSON.parse(appData.materials[index].materialJSON);	
 	frame.contentWindow.changeMaterial(mat);
 	
 	
 	
   }, 
+
 
   handleClientPasswordInputChange: function (el){
 	

@@ -325,7 +325,7 @@
 
 				console.log(materials);
 				
-				setTimeout(() => {
+				/*setTimeout(() => {
 	
 					const materialJSON = JSON.stringify(materials[0].toJSON());
 					
@@ -336,7 +336,7 @@
 					};
 		
 					parent.window.saveMaterial(mat);
-				}, 1000);
+				}, 1000); */
 
 				
 				
@@ -345,28 +345,33 @@
 		
 
 			const changeMaterial = (mat) => { 
-				console.log(mat);
-				materialLoader.parse(mat,
-
 					
-					function ( material ) {
-					   
-						selectedPart.material.copy(material);
+				let loadedTextures = {};
 
-						selectedPart.material.needsUpdate = true;	
-					},
+				
 
+				mat.textures.forEach((tex) => { 
+					console.log(tex);	
+					const image = mat.images.find( (img) => (img.uuid === tex.image) );
+										
+					let texture = textureLoader.load(image.url);
+					texture.format = tex.format;
+					texture.wrapS = tex.wrap[0];
+					texture.wrapT = tex.wrap[1];
+					texture.repeat.x = tex.repeat[0];
+					texture.repeat.y = tex.repeat[1];		
 					
-					function ( xhr ) {
-						console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-					},
+					loadedTextures[tex.uuid] = texture;
 
-					
-					function ( err ) {
-						console.log( err );
-					}
-				);
+				});
 
+				materialLoader.setTextures(loadedTextures);
+
+				const material = materialLoader.parse(mat);
+				
+				selectedPart.material.copy(material);
+				
+				selectedPart.material.needsUpdate = true;
 				
 			}
 

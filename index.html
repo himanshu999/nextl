@@ -228,9 +228,20 @@
 		    console.error("Error adding document: ", error);
 		});
 
-	  }
+	  } 
 
 	  window.saveMaterial = saveMaterial;
+
+
+	  firebaseDB.collection("materials").get().then((querySnapshot) => {
+	    querySnapshot.forEach((doc) => {
+		console.log(`${doc.id}`);
+	    
+		appData.materials.push(doc.data());
+	    });
+
+	    spa.$render('customizerView');
+	  }); 
   </script>
 
   <script>
