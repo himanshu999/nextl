@@ -1,16 +1,16 @@
 spa.$('customizerView', {
   require: 'dataStore',
 
-  /*target: '#spaCompContainer_header_1',
+  /*target: '#spaCompContainer_header_1', */
 
   getImage: function(obj) {
-	
+	console.log('get image called');sa
 	if(obj.materialJSON !== ""){
 		const mat = JSON.parse(obj.materialJSON);	
 		return mat.images[0].url;
 	}
 	return "";
-  }, */
+  }, 
 
 });
 
