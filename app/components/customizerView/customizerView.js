@@ -4,7 +4,7 @@ spa.$('customizerView', {
   /*target: '#spaCompContainer_header_1', */
 
   getImage: function(obj) {
-	console.log('get image called');sa
+	console.log('get image called');
 	if(obj.materialJSON !== ""){
 		const mat = JSON.parse(obj.materialJSON);	
 		return mat.images[0].url;
