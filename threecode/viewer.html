@@ -369,18 +369,34 @@
 				   mat.textures.forEach((tex) => { 
 					console.log(tex);	
 					const image = mat.images.find( (img) => (img.uuid === tex.image) );
-										
-					let texture = textureLoader.load(image.url);
-					texture.format = tex.format;
-					texture.wrapS = tex.wrap[0];
-					texture.wrapT = tex.wrap[1];
-					texture.repeat.x = tex.repeat[0];
-					texture.repeat.y = tex.repeat[1];		
+
 					
-					loadedTextures[tex.uuid] = texture;
+					//parent.firebaseStorage.refFromURL(image.url).getDownloadURL()
+					//.then((url) => {
+						
+						//console.log(url);
+
+						let texture = textureLoader.load(image.url);
+						texture.format = tex.format;
+						texture.wrapS = tex.wrap[0];
+						texture.wrapT = tex.wrap[1];
+						texture.repeat.x = tex.repeat[0];
+						texture.repeat.y = tex.repeat[1];		
+					
+					    loadedTextures[tex.uuid] = texture;
+
+					//})
+					//.catch((error) => {
+						// Handle any errors
+					//});
+
+
+										
+					
 
 				});
 
+				console.log(loadedTextures);
 				materialLoader.setTextures(loadedTextures);
 				
 				let material = materialLoader.parse(mat);
