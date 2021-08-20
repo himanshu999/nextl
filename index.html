@@ -314,24 +314,40 @@
 			setTimeout(() => {
 				
 				mat.materialJSON = JSON.stringify(material);
-				//console.log(mat.materialJSON);
-			}, 1000)
+				console.log(mat.materialJSON);
+			}, 1500)
 			
 		});
-
-		
-
-		
-		
-	  //spa.$render('customizerView');  
-	  
-	  /*setTimeout(() => {
-		window.frames[0].loadMaterials();
-	  }, 500); */
 	  
 	  
 	    
 	  }); 
+
+
+	  const saveProduct = (product, imgData) => {
+
+		//save thumb image
+
+		let imageRef = firebaseStorage.ref().child(new Date().getTime() + '.jpg');
+
+			imageRef.put(dataURItoBlob(imgData)).then((snapshot) => {
+				console.log('Uploaded an image!');
+			});
+
+		const thumbnail = 'gs://'+imageRef.bucket+'/'+imageRef.name;
+
+		//
+		firebaseDB.collection("products").add({...product, thumbnail})
+		.then((docRef) => {
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch((error) => {
+			console.error("Error adding document: ", error);
+		});
+
+}
+
+window.saveProduct = saveProduct;
   </script>
 
   <script>

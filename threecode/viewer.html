@@ -55,6 +55,12 @@
 
 			let materials = [];
 
+			const newProductData = {shoeURL: './assets/shoe.glb'};
+
+			let productData = undefined;
+
+			let shoeLaceMaterial;
+
 			init();
 			
 			animate();
@@ -66,7 +72,7 @@
 				scene.background = null;
 				
 
-				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true, preserveDrawingBuffer: true } );
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
 				renderer.exposure = 1.0;
@@ -99,28 +105,69 @@
 				controls.minDistance = 100;
 				controls.maxDistance = 500;
 
-				const shoeLaceMaterial = new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.8, metalness: 0.1 });
+				shoeLaceMaterial = new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.8, metalness: 0.1 });
 				
 
 				//controls.maxPolarAngle = Math.PI / 2;
 
 
+				if(!productData){
+					productData = {...newProductData};
+				}
+
 				materialLoader = new THREE.MaterialLoader();
 				
+				loadShoeModel();
+
+
+				textureLoader = new THREE.TextureLoader();
+				//createMaterials();
+				
+
+				raycaster = new THREE.Raycaster();
+				
+
+				window.addEventListener( 'resize', onWindowResize );
+				window.addEventListener('pointerdown', raycast);
+	
+				window.model = model;
+
+			}
+
+
+			function loadShoeModel() {
+
 				const loader = new GLTFLoader();
 				
-				loader.load( './assets/shoe.glb', function ( gltf ) {
+				loader.load( productData.shoeURL, function ( gltf ) {
+
+							//const config = productData.config;
+							console.log(productData);
+							let config = productData.configFile;
 
 							gltf.scene.traverse( function ( child ) {
 								
 								
 								if ( child.isMesh ) {
 
-									//roughnessMipmapper.generateMipmaps( child.material );
-									child.material = new THREE.MeshStandardMaterial({ color: 0x445566, roughness: 0.9, metalness: 0.1   });
-									child.material.color.r = Math.random(100);
-									child.material.color.g = Math.random(100);
-									child.material.color.b = Math.random(100);
+									if(config){
+										
+										let configg = JSON.parse(config);
+
+										const material = materials.find( matrl => matrl.uuid == configg[child.name]);
+
+										console.log(material);
+
+										child.material = material;
+
+									}else{
+										//roughnessMipmapper.generateMipmaps( child.material );
+										child.material = new THREE.MeshStandardMaterial({ color: 0x445566, roughness: 0.9, metalness: 0.1   });
+										child.material.color.r = Math.random(100);
+										child.material.color.g = Math.random(100);
+										child.material.color.b = Math.random(100);
+									}
+									
 
 									if(child.name.startsWith('pasted__pPlane')) child.material = shoeLaceMaterial;
 									
@@ -145,20 +192,6 @@
 							
 
 						} );
-
-
-				textureLoader = new THREE.TextureLoader();
-				//createMaterials();
-				
-
-				raycaster = new THREE.Raycaster();
-				
-
-				window.addEventListener( 'resize', onWindowResize );
-				window.addEventListener('pointerdown', raycast);
-	
-				window.model = model;
-
 			}
 
 			function onWindowResize() {
@@ -349,7 +382,8 @@
 				
 				const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
 				
-				selectedPart.material.copy(material);
+				
+				selectedPart.material = material;
 				
 				selectedPart.material.needsUpdate = true;
 				
@@ -413,9 +447,64 @@
 				
 			}
 
+			const createConfigFile = () => {
+				
+				let config = {};
+
+				model.traverse( function ( child ) {
+								
+								
+								if ( child.isMesh ) {
+
+									config[child.name] = child.material.uuid;
+									
+
+								}
+
+							
+
+							} );
+
+				return config;			
+							
+							
+
+			}
+
+			const saveProduct = () => {
+				let product = {name: 'Some Name', clientID: 'sss', shoeID: 'dddd', configFile: JSON.stringify(createConfigFile())};
+
+				parent.window.saveProduct(product, getScreenShot());
+			}
+
+			const loadShoeDesign = (pData) => {
+
+				scene.remove(model);
+				productData = pData;
+				loadShoeModel();
+				//init();
+				animate();
+			}
+
+			const getScreenShot = () => {
+				
+				var strMime = "image/jpeg";
+				const imgData = renderer.domElement.toDataURL(strMime);
+
+				return imgData;
+			}
+
+			window.saveProduct = saveProduct;
+
+			window.createConfigFile = createConfigFile;
+
 			window.changeMaterial = changeMaterial;
 
-			window.loadMaterials = loadMaterials;			
+			window.loadMaterials = loadMaterials;
+			
+			window.loadShoeDesign = loadShoeDesign;
+
+			window.getScreenShot = getScreenShot;
 			
 
 		</script>
