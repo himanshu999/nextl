@@ -142,6 +142,24 @@
 		
 	}
 
+	.preset-thumb {
+	    border-radius: 3px;
+	    border: 1px solid #DDD;
+	    margin: 0px auto 4px auto;
+	    padding: 0;
+	    padding-bottom: 0;
+	    padding-top: 100%;
+	    background-position: center center;
+	    background-size: cover;
+	    cursor:pointer;
+	    transition: box-shadow 0.3s ease-in-out;
+	}
+
+	.preset-thumb:hover{
+		box-shadow: 1px 1px 9px 1px rgb(119 116 228 / 63%);
+		
+	}
+
 	.mat-thumb + span{
 	
 	    font-size: 0.8rem;
@@ -278,7 +296,9 @@
 	  window.saveMaterial = saveMaterial;
 
 
-	  firebaseDB.collection("materials").get().then((querySnapshot) => {
+	  function loadMaterials(){
+
+		firebaseDB.collection("materials").get().then((querySnapshot) => {
 	    querySnapshot.forEach((doc) => {
 		console.log(`${doc.id}`);
 	    
@@ -321,7 +341,66 @@
 	  
 	  
 	    
-	  }); 
+	  });
+
+	  }
+
+	  function loadUserSavedShoes(){
+
+		firebaseDB.collection("products").get().then((querySnapshot) => {
+
+			querySnapshot.forEach((doc) => {
+
+				
+
+				const product = doc.data();
+
+				appData.userProducts.push({...product});
+
+				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
+
+						const foundPr = appData.userProducts.find(p => p.id == product.id);
+						foundPr.thumbnail = url;
+
+					})
+					.catch((error) => {
+						// Handle any errors
+					});
+			});
+
+		});
+
+	  }
+
+	  function loadPresetShoes(){
+
+		firebaseDB.collection("products").where("preset", "==", true).get().then((querySnapshot) => {
+
+			querySnapshot.forEach((doc) => {
+
+				const product = doc.data();
+				appData.presetShoes.push({...product});
+
+				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
+
+				const foundPr = appData.presetShoes.find(p => p.id == product.id);
+				foundPr.thumbnail = url;
+
+				})
+				.catch((error) => {
+				// Handle any errors
+				});
+			});
+
+		});
+
+	}
+
+
+	  loadMaterials();
+	  loadUserSavedShoes();
+	  loadPresetShoes();
+	   
 
 
 	  const saveProduct = (product, imgData) => {
@@ -400,6 +479,8 @@ window.saveProduct = saveProduct;
 
   materials : [],
   matCategories: [],
+  presetShoes: [],
+  userProducts: [],
   };
   </script>
 

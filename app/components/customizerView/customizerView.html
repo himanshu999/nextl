@@ -1,5 +1,5 @@
  <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
-	<div class="">
+	<div id="mat-holder" class="">
 		<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>
 		<ul id="mat-list" class="navbar-nav">
 			<li class="nav-item">
@@ -19,103 +19,60 @@
 			  </div>
 			  </div>
 			</li>
+      		</ul>
+	</div>
+
+	<div style="display:none" id="saved-holder" class="">
+		
+		<ul id="mat-list" class="navbar-nav">
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
-			    Fabric
+			    Saved Designs
 			  </a>
 			  <div class="container">
 			  <div class="row">
-				<div onclick="{$}loadShoe()" class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
+				{{#each	_global_.appData.userProducts}}			
+				<div onclick="{$}loadShoe({{@index}}, false)" class="col-xl-6 text-center mat-thumb-hldr">
+					<div style="background-image:url({{this.thumbnail}})" class="preset-thumb"></div>
+					
 				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
+				{{/each}}
+				
 				
 			  </div>
 			  </div>
 			</li>
+      		</ul>
+	</div>
+
+	<div style="display:none" id="preset-holder" class="">
+		
+		<ul id="mat-list" class="navbar-nav">
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
-			    Synthetic
-			  </a>
-
-			<div class="container">
-			  <div class="row">
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-				
-			  </div>
-			  </div>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="#">
-			    Polyester
+			    Shoe Presets
 			  </a>
 			  <div class="container">
 			  <div class="row">
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
+				{{#each	_global_.appData.presetShoes}}			
+				<div onclick="{$}loadShoe({{@index}}, true)" class="col-xl-6 text-center mat-thumb-hldr">
+					<div style="background-image:url({{this.thumbnail}})" class="preset-thumb"></div>
+					
 				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
-
-				<div class="col-xl-4 text-center mat-thumb-hldr">
-					<div style="background-image:url('./assets/leather.jpg')" class="mat-thumb"></div>
-					<span>Type 1</span>
-				</div>
+				{{/each}}
+				
 				
 			  </div>
 			  </div>
 			</li>
-			
       		</ul>
 	</div>
   </nav>
 
   <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">
-	<i class="fas fa-tshirt selected"></i>
-	<i class="fas fa-heart"></i>
-	<i class="fas fa-heart"></i>
+	<i id="showMatBtn" onclick="{$}showMaterials()" class="fas fa-tshirt selected"></i>
+	<i id="showSavedBtn" onclick="{$}showSavedShoes()" class="fas fa-heart"></i>
+	<i id="showPresetBtn" onclick="{$}showPresetShoes()" class="fas fa-heart"></i>
   </nav>
 
 
@@ -129,12 +86,8 @@
     <!-- Page content -->
     <div class="container-fluid mt--7">
       <div class="row">
-       
-		
-      <iframe id="customizer-iframe" src="threecode/viewer.html"></iframe>       
-	
 
-	
+      <iframe id="customizer-iframe" src="threecode/viewer.html"></iframe>       
 
       </div>
 

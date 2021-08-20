@@ -139,7 +139,7 @@
 
 				const loader = new GLTFLoader();
 				
-				loader.load( productData.shoeURL, function ( gltf ) {
+				loader.load( productData.shoeURL || './assets/shoe.glb', function ( gltf ) {
 
 							//const config = productData.config;
 							console.log(productData);
@@ -158,7 +158,14 @@
 
 										console.log(material);
 
+										if(material)
 										child.material = material;
+										else{
+											child.material = new THREE.MeshStandardMaterial({ color: 0x445566, roughness: 0.9, metalness: 0.1   });
+											child.material.color.r = Math.random(100);
+											child.material.color.g = Math.random(100);
+											child.material.color.b = Math.random(100);
+										}
 
 									}else{
 										//roughnessMipmapper.generateMipmaps( child.material );

@@ -4,7 +4,7 @@ spa.$('customizerView', {
   /*target: '#spaCompContainer_header_1', */
 
   getImage: function(obj) {
-	console.log('get image called');
+	
 	if(obj.materialJSON !== ""){
 		const mat = JSON.parse(obj.materialJSON);	
 		return mat.images[0].url;
@@ -44,14 +44,74 @@ spa.$extend('customizerView', {
 	
   }, 
 
-  loadShoe: function( ) {
+  showMaterials: function() {
+    
+	
+	document.getElementById('mat-holder').style.display = 'block';
+	document.getElementById('saved-holder').style.display = 'none';
+	document.getElementById('preset-holder').style.display = 'none';
+
+	const showMatBtn = document.getElementById('showMatBtn');
+	const showSavedBtn = document.getElementById('showSavedBtn');
+	const showPresetBtn = document.getElementById('showPresetBtn');
+
+	showMatBtn.classList.add('selected');
+	showSavedBtn.classList.remove('selected');
+	showPresetBtn.classList.remove('selected');
+	
+  },
+
+  showSavedShoes: function( ) {
+    
+	
+	document.getElementById('mat-holder').style.display = 'none';
+	document.getElementById('saved-holder').style.display = 'block';
+	document.getElementById('preset-holder').style.display = 'none';
+
+	const showMatBtn = document.getElementById('showMatBtn');
+	const showSavedBtn = document.getElementById('showSavedBtn');
+	const showPresetBtn = document.getElementById('showPresetBtn');
+
+	showMatBtn.classList.remove('selected');
+	showSavedBtn.classList.add('selected');
+	showPresetBtn.classList.remove('selected');
+	
+  },
+
+  showPresetShoes: function(  ) {
+    
+	
+	document.getElementById('mat-holder').style.display = 'none';
+	document.getElementById('saved-holder').style.display = 'none';
+	document.getElementById('preset-holder').style.display = 'block';
+
+	const showMatBtn = document.getElementById('showMatBtn');
+	const showSavedBtn = document.getElementById('showSavedBtn');
+	const showPresetBtn = document.getElementById('showPresetBtn');
+
+	showMatBtn.classList.remove('selected');
+	showSavedBtn.classList.remove('selected');
+	showPresetBtn.classList.add('selected');
+	
+  },
+
+  loadShoe: function(indexx, presetBool) {
     //return {'Male': 'Mr.', 'Female': 'Ms.'}[gender];
 
-	const id = 'lKSj3JzYh2zqlwFka2FJ';
+	//const id = 'lKSj3JzYh2zqlwFka2FJ';
+
+	console.log(appData.presetShoes[indexx]);
+
+	let productData; 
+	if(presetBool) 
+		productData = appData.presetShoes[indexx]
+	else
+		productData = appData.userProducts[indexx];
+	
 
 	const frame = document.getElementById('customizer-iframe');
 	
-	let productData = undefined;
+	/*let productData = undefined;
 
 	firebaseDB.collection("products").doc(id).get().then((doc) => {
 
@@ -61,15 +121,15 @@ spa.$extend('customizerView', {
 		} else {
 			// doc.data() will be undefined in this case
 			console.log("No such document!");
-		}
+		} */
 
-		frame.contentWindow.loadShoeDesign(productData);
+		//frame.contentWindow.loadShoeDesign(productData);
 
 
-    });
+   // }); 
 	
 	
-	
+	frame.contentWindow.loadShoeDesign(productData);
 	
 	
   }, 
