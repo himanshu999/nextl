@@ -32,7 +32,7 @@ spa.$extend('shoesListing', {
 	
 	setTimeout(() => {
 		window.frames[0].loadMaterials();
-	}, 1000);
+	}, 3000);
 	//spa.$show('customizerView');
 	
    }
