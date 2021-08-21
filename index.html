@@ -93,18 +93,17 @@
 	}
 
 	#sidenav2{
-	    right: 362px;
-	    z-index: 100;
-	    width: unset;
-	    height: 264px;
-	    min-height: unset;
-	    padding: 19px 14px 0px 14px;
-	    top: 50%;
-	    transform: translate(0,-50%);
-	    color: lightgrey;
-	    border-radius: 100px;
-	    overflow: hidden;
-	    text-align: center;
+	right: 362px;
+	z-index: 100;
+    width: unset !important;
+    height: 100%;
+    /* max-width: unset !important; */
+    min-height: unset;
+    padding: 0 11px;
+    overflow: hidden;
+    text-align: center;
+    background: transparent !important;
+    box-shadow: none !important;
 
 	}
 
@@ -123,6 +122,23 @@
 	#sidenav2 i:hover{
 	   color: blueviolet;
 	}
+
+	#three-btn-hldr{
+		height: 264px;
+		color: lightgrey;
+		border-radius: 100px;
+		background: white;
+		padding: 19px 14px 0px 14px;
+		margin-top: 50vh;
+		/* position: absolute; */
+		top: 50%;
+		right: 0;
+		transform: translate(0, -50%);
+		box-shadow: 1px 1px 9px 3px rgb(0 0 0 / 10%);
+}
+
+
+	
 
 	.mat-thumb {
 	    border-radius: 50%;
@@ -355,11 +371,12 @@
 
 				const product = doc.data();
 
-				appData.userProducts.push({...product});
+				appData.userProducts.push({...product, id: doc.id});
 
 				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
-
-						const foundPr = appData.userProducts.find(p => p.id == product.id);
+						
+						const foundPr = appData.userProducts.find(p => p.id == doc.id);
+						
 						foundPr.thumbnail = url;
 
 					})
@@ -379,11 +396,11 @@
 			querySnapshot.forEach((doc) => {
 
 				const product = doc.data();
-				appData.presetShoes.push({...product});
+				appData.presetShoes.push({...product, id: doc.id});
 
 				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
 
-				const foundPr = appData.presetShoes.find(p => p.id == product.id);
+				const foundPr = appData.presetShoes.find(p => p.id == doc.id);
 				foundPr.thumbnail = url;
 
 				})
