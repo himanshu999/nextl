@@ -363,7 +363,7 @@
 
 	  function loadUserSavedShoes(){
 
-		firebaseDB.collection("products").get().then((querySnapshot) => {
+		firebaseDB.collection("products").orderBy('created_at','desc').get().then((querySnapshot) => {
 
 			querySnapshot.forEach((doc) => {
 
@@ -391,7 +391,7 @@
 
 	  function loadPresetShoes(){
 
-		firebaseDB.collection("products").where("preset", "==", true).get().then((querySnapshot) => {
+		firebaseDB.collection("products").where("preset", "==", true).orderBy('created_at','desc').get().then((querySnapshot) => {
 
 			querySnapshot.forEach((doc) => {
 
@@ -433,7 +433,7 @@
 		const thumbnail = 'gs://'+imageRef.bucket+'/'+imageRef.name;
 
 		//
-		firebaseDB.collection("products").add({...product, thumbnail})
+		firebaseDB.collection("products").add({...product, thumbnail, created_at: Date.now()})
 		.then((docRef) => {
 			console.log("Document written with ID: ", docRef.id);
 		})
