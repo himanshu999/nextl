@@ -134,17 +134,26 @@ spa.$extend('customizerView', {
 	
   }, 
 
-
-  handleClientPasswordInputChange: function (el){
+  getPDF: function (){
 	
-	const clients = appData.clients;
-	let currentClientIndex = appData.currentClientIndex;
 
-	if(el.value === clients[currentClientIndex].password){
-		
-		spa.$hide('clientListing');	
-		spa.$show('shoesListing');
-	}
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.getPDF();
+
+	setTimeout(() => {
+		spa.$render('pdfView');
+		spa.$show('pdfView');
+
+	}, 300);
+
+	setTimeout(() => {
+		html2pdf().from(document.getElementById('spaCompContainer_pdfView_1')).save();
+	}, 350);
+
+	setTimeout(() => {
+		spa.$hide('pdfView');
+	}, 400);
+	
 	
 
   }

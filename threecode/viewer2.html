@@ -10,6 +10,10 @@
 		<link type="text/css" rel="stylesheet" href="./assets/main.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
 		
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+
 		<style>
 			body {
 				color: #000;
@@ -29,6 +33,102 @@
 		</style>
 		<script>
 		 var camerag, selectedPart;
+
+         var productData = undefined;
+
+         var appData = {
+                materials : [],
+            };
+
+
+         var firebaseConfig = {
+	    apiKey: "AIzaSyC2FfpALz8l9XSIxFYdMe5pQ_XzOfhfcYU",
+	    authDomain: "nextl-5bff0.firebaseapp.com",
+	    projectId: "nextl-5bff0",
+	    storageBucket: "nextl-5bff0.appspot.com",
+	    messagingSenderId: "801014308314",
+	    appId: "1:801014308314:web:2653b4b23cf76b15e274e3"
+	  };
+	  
+        firebase.initializeApp(firebaseConfig);
+        var firebaseDB = firebase.firestore();
+        firebaseDB.settings({ experimentalForceLongPolling: true });
+
+        var firebaseStorage = firebase.storage();
+
+
+        const lLoadMaterials = () =>{
+                
+                
+                firebaseDB.collection("materials").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                console.log(`${doc.id}`);
+                
+                appData.materials.push(doc.data());
+
+                
+                
+                });
+
+                
+
+                appData.materials.forEach((mat) => {
+                let material = JSON.parse(mat.materialJSON);
+
+                material.name = mat.name;
+                material.category = mat.category;
+
+                material.images.forEach((imag) => {
+
+                    firebaseStorage.refFromURL(imag.url).getDownloadURL().then((url) => {
+
+                        imag.url = url;
+                        //console.log(imag);
+
+                    })
+                    .catch((error) => {
+                            // Handle any errors
+                    });
+
+                });
+
+                setTimeout(() => {
+                    
+                    mat.materialJSON = JSON.stringify(material);
+                    console.log(mat.materialJSON);
+                }, 1500)
+			
+		    });
+
+        
+                setTimeout(() => {
+                    loadMaterials();
+                }, 2000);
+                
+            
+            
+                
+            });
+
+	  
+        }
+
+        lLoadMaterials();
+
+        var searchParams = new URLSearchParams(window.location.search);
+
+		const pid = searchParams.get("pid");
+
+
+        firebaseDB.collection("products").doc(pid).get().then((doc) => {
+
+                console.log(doc);
+                const product = doc.data(); 
+                productData = {...product, id : doc.id };
+
+            
+        });
+
 		</script>
 	</head>
 
@@ -57,15 +157,20 @@
 
 			const newProductData = {shoeURL: './assets/shoe.glb'};
 
-			let productData = undefined;
-
 			let shoeLaceMaterial;
 
-			init();
+			//init();
 			
-			animate();
+			//animate();
 
-			function init() {
+            //loadMaterials();
+
+            materialLoader = new THREE.MaterialLoader();
+            textureLoader = new THREE.TextureLoader();
+
+
+			function init(){
+
 
 				scene = new THREE.Scene();
 				//scene.background = new THREE.Color( 0xcccccc );
@@ -115,13 +220,12 @@
 					productData = {...newProductData};
 				}
 
-
-				materialLoader = new THREE.MaterialLoader();
+				
 				
 				loadShoeModel();
 
 
-				textureLoader = new THREE.TextureLoader();
+				
 				//createMaterials();
 				
 
@@ -133,13 +237,15 @@
 	
 				window.model = model;
 
+                
+
 			}
 
 
 			function loadShoeModel() {
-
+                
 				const loader = new GLTFLoader();
-				
+
 				loader.load( productData.shoeURL || './assets/shoe.glb', function ( gltf ) {
 
 							//const config = productData.config;
@@ -155,7 +261,9 @@
 										
 										let configg = JSON.parse(config);
 
-										const material = materials.find( matrl => matrl.uuid == configg[child.name]);
+										const material = materials.find( matrl => matrl.uuid == configg[child.name].uuid);
+
+                                        //const material = materials[configg[child.name].matIndex];
 
 										console.log(material);
 
@@ -214,13 +322,11 @@
 
 			}
 
-			function animate() {
+			function animate(){
 
 				requestAnimationFrame( animate );
 
 				controls.update(); 
-
-				
 
 				render();
 
@@ -385,11 +491,11 @@
 			}
 		
 
-			const changeMaterial = (mat) => { 
+			const changeMaterial = (index) => { 
 					
 				
-				const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
-				//const material = materials[index];
+				//const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
+				const material = materials[index];
 				
 				selectedPart.material = material;
 				
@@ -399,59 +505,64 @@
 
 			const loadMaterials = () => {
 
-				materials = [];
-				
-				
-				window.parent.appData.materials.forEach((mat) => {
-				
-				   mat = JSON.parse(mat.materialJSON);
-		                   let loadedTextures = {};	
-				   
-				   if(mat.textures)		
-				   mat.textures.forEach((tex) => { 
-					console.log(tex);	
-					const image = mat.images.find( (img) => (img.uuid === tex.image) );
 
-					
-					//parent.firebaseStorage.refFromURL(image.url).getDownloadURL()
-					//.then((url) => {
+                        materials = [];
 						
-						//console.log(url);
+                        appData.materials.forEach((mat) => {
+                        
+                        mat = JSON.parse(mat.materialJSON);
+                                let loadedTextures = {};	
+                        
+                        if(mat.textures)		
+                        mat.textures.forEach((tex) => { 
+                            console.log(tex);	
+                            const image = mat.images.find( (img) => (img.uuid === tex.image) );
 
-						let texture = textureLoader.load(image.url);
-						//texture.format = tex.format;
-						texture.wrapS = tex.wrap[0];
-						texture.wrapT = tex.wrap[1];
-						texture.repeat.x = tex.repeat[0];
-						texture.repeat.y = tex.repeat[1];	
-						texture.encoding = THREE.sRGBEncoding;	
-					
-					    loadedTextures[tex.uuid] = texture;
+                            
+                            //parent.firebaseStorage.refFromURL(image.url).getDownloadURL()
+                            //.then((url) => {
+                                
+                                //console.log(url);
 
-					//})
-					//.catch((error) => {
-						// Handle any errors
-					//});
+                                let texture = textureLoader.load(image.url);
+                                //texture.format = tex.format;
+                                texture.wrapS = tex.wrap[0];
+                                texture.wrapT = tex.wrap[1];
+                                texture.repeat.x = tex.repeat[0];
+                                texture.repeat.y = tex.repeat[1];	
+                                texture.encoding = THREE.sRGBEncoding;	
+                            
+                                loadedTextures[tex.uuid] = texture;
+
+                            //})
+                            //.catch((error) => {
+                                // Handle any errors
+                            //});
 
 
-										
-					
+                                                
+                            
 
-				});
+                        });
 
-				console.log(loadedTextures);
-				materialLoader.setTextures(loadedTextures);
-				
-				let material = materialLoader.parse(mat);
-				material.uuid = mat.uuid;
-				console.log(mat);
-				console.log(material);
-				materials.push(material);	
+                        console.log(loadedTextures);
+                        materialLoader.setTextures(loadedTextures);
+                        
+                        let material = materialLoader.parse(mat);
+                        material.uuid = mat.uuid;
+                        console.log(mat);
+                        console.log(material);
+                        materials.push(material);	
+
 
 				});
 
 
 				console.log(materials);
+                
+                init();
+                animate();
+                
 
 				
 			}
@@ -465,7 +576,7 @@
 								
 								if ( child.isMesh ) {
 
-									config[child.name] = {name: child.material.name, category: child.material.category, uuid: child.material.uuid};
+									config[child.name] = {name: child.material.name, category: child.material.category};
 									
 
 								}
@@ -515,6 +626,8 @@
 
 			}
 
+            
+
 			window.saveProduct = saveProduct;
 
 			window.createConfigFile = createConfigFile;
@@ -523,15 +636,20 @@
 
 			window.loadMaterials = loadMaterials;
 			
-			window.loadShoeDesign = loadShoeDesign;
+			//window.loadShoeDesign = loadShoeDesign;
 
 			window.getScreenShot = getScreenShot;
 
 			window.getPDF = getPDF;
+
+            //window.init = init;
+
+            //window.animate = animate;
+
+            
 			
 
 		</script>
 
 	</body>
 </html>
-

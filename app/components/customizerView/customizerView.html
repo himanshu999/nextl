@@ -2,23 +2,23 @@
 	<div id="mat-holder" class="">
 		<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>
 		<ul id="mat-list" class="navbar-nav">
+			
 			<li class="nav-item">
 			  <a class="nav-link" href="#">
 			    Leather
 			  </a>
 			  <div class="container">
 			  <div class="row">
-				{{#each	_global_.appData.materials}}			
+				{{#:each _global_.appData.materials}}	
 				<div onclick="{$}changeMaterial({{@index}})" class="col-xl-4 text-center mat-thumb-hldr">
 					<div style="background-image:url({{:fn '{$}getImage' this }})" class="mat-thumb"></div>
 					<span>Type {{@index}}</span>
 				</div>
-				{{/each}}
-				
-				
+				{{/:each}}			
 			  </div>
 			  </div>
 			</li>
+			
       		</ul>
 	</div>
 
@@ -68,6 +68,10 @@
       		</ul>
 	</div>
   </nav>
+
+  <button style="top:4px; right: 354px;" class="abs-btns btn"><i class="fa fa-eye"></i>View AR</button>
+  <button style="bottom:92px; right: 356px;" class="abs-btns btn"><i class="fa fa-share-alt"></i>Share</button>
+  <button onclick="{$}getPDF()" style="bottom:24px; right: 350px;" class="abs-btns btn"><i class="fa fa-download"></i>Get PDF</button>
 
   <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">
 	<div id="three-btn-hldr">

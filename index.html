@@ -220,6 +220,31 @@
     	    height: 100%;
 
 	}
+
+	.abs-btns {
+    font-weight: 600;
+    font-size: 11px;
+    color: #6d6d6d;
+	z-index: 200;
+    position: absolute;
+    background: transparent;
+    /* text-transform: uppercase; */
+    /* background: red; */
+    cursor: pointer !IMPORTANT;
+}
+
+.abs-btns i {
+    /* margin-right: 9px !important; */
+    display: block !important;
+    /* text-transform: UPPERCASE; */
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+#spaCompContainer_pdfView_1{
+	/*position: absolute;*/
+	z-index:-1;
+}
 	
 	</style>
 </head>
@@ -231,11 +256,12 @@
   <script src="http://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"  ></script>
   <script src="http://cdn.jsdelivr.net/gh/sucom/SPA.js/dist/spa-bundle.min.js" ></script>
   
+  
 	
   <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
   <script>
 
@@ -332,6 +358,9 @@
 
 		appData.materials.forEach((mat) => {
 			let material = JSON.parse(mat.materialJSON);
+
+			material.name = mat.name;
+			material.category = mat.category;
 
 			material.images.forEach((imag) => {
 
@@ -498,6 +527,11 @@ window.saveProduct = saveProduct;
   matCategories: [],
   presetShoes: [],
   userProducts: [],
+  shoeConfig: {
+	  thumbnail: 'sssss',
+	  shoeViewerURL: 'http://somerandomURL/asass.html?id="ddddd"',
+	  config: {'dddd': {matName: '12121w', matCat: 'eeeeee'}}
+  }
   };
   </script>
 
