@@ -181,7 +181,7 @@ spa.$extend('customizerView', {
 
 		const pid = appData.currentProductID;
 
-	  	const url = `${window.location.href}/threecode/viewer2.html?pid=${pid}`;
+	  	const url = `${window.location.href}threecode/viewer2.html?pid=${pid}`;
 	  
 		navigator.clipboard.writeText(url);
 
