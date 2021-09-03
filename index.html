@@ -245,6 +245,27 @@
 	/*position: absolute;*/
 	z-index:-1;
 }
+
+.toast{
+	position: absolute;
+	z-index: 400;
+    bottom: 15%;
+    left: 50%;
+	opacity: 0;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    color: #ddd;
+    padding: 16px;
+    border-radius: 4px;
+    background: #353535;
+    transform: translate(-50%);
+    box-shadow: -2px 0px 9px 1px rgb(0 0 0 / 50%);
+}
+
+.toast.show{
+	opacity: 1.0;
+}
+
 	
 	</style>
 </head>
@@ -262,6 +283,14 @@
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  
+  <div id="toast" class="toast">
+    <!--<div class="toast-header">
+      Toast Header
+    </div>-->
+    <div class="toast-body"></div>
+  </div>
 
   <script>
 
@@ -461,18 +490,39 @@
 
 		const thumbnail = 'gs://'+imageRef.bucket+'/'+imageRef.name;
 
-		//
+		if(!appData.currentProductID)
+		//if new product
 		firebaseDB.collection("products").add({...product, thumbnail, created_at: Date.now()})
 		.then((docRef) => {
 			console.log("Document written with ID: ", docRef.id);
+			appData.currentProductID = docRef.id;
 		})
 		.catch((error) => {
 			console.error("Error adding document: ", error);
 		});
-
+		else
+		//otherwise update
+		firebaseDB.collection("products").doc(appData.currentProductID).update({...product, thumbnail, created_at: Date.now()})
+		.then(() => {
+			console.log("Document updated successfully with ID: ", appData.currentProductID);
+		})
+		.catch((error) => {
+			console.error("Error updating document: ", error);
+		});
 }
 
+	const showToast = (msg) => {
+		const toastEl = document.getElementById('toast');
+		toastEl.children[0].innerHTML = msg;
+		toastEl.classList.add('show');
+
+		setTimeout(() => {
+			toastEl.classList.remove('show');
+		}, 1300);
+	}
+
 window.saveProduct = saveProduct;
+window.showToast = showToast;
   </script>
 
   <script>
@@ -534,6 +584,7 @@ window.saveProduct = saveProduct;
   }
   };
   </script>
+
 
 </body>
 </html>

@@ -1,4 +1,9 @@
- <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
+<div id="pdf-modal" class="modal-wrapper">
+	<div class="modal-body">
+		<h3 style="color:#ddd">Generating PDF...</h3>	
+	</div>
+</div>
+<nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
 	<div id="mat-holder" class="">
 		<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>
 		<ul id="mat-list" class="navbar-nav">
@@ -70,7 +75,7 @@
   </nav>
 
   <button style="top:4px; right: 354px;" class="abs-btns btn"><i class="fa fa-eye"></i>View AR</button>
-  <button style="bottom:92px; right: 356px;" class="abs-btns btn"><i class="fa fa-share-alt"></i>Share</button>
+  <button onclick="{$}handleShare()" style="bottom:92px; right: 356px;" class="abs-btns btn"><i class="fa fa-share-alt"></i>Share</button>
   <button onclick="{$}getPDF()" style="bottom:24px; right: 350px;" class="abs-btns btn"><i class="fa fa-download"></i>Get PDF</button>
 
   <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">

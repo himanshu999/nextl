@@ -155,7 +155,7 @@
 										
 										let configg = JSON.parse(config);
 
-										const material = materials.find( matrl => matrl.uuid == configg[child.name]);
+										const material = materials.find( matrl => matrl.uuid == configg[child.name].uuid);
 
 										console.log(material);
 
@@ -496,10 +496,14 @@
 			}
 
 			const getScreenShot = () => {
+				
+				const originalCamPos = camera.position.clone();
 				camera.position.set(267, 37, 81);
 				var strMime = "image/jpeg";
 				const imgData = renderer.domElement.toDataURL(strMime);
-
+		
+				camera.position.copy(originalCamPos);
+				
 				return imgData;
 			}
 
@@ -507,7 +511,7 @@
 				
 				//createConfigFile();
 
-				const myConfig = {shoeViewerURL: 'somerandomurl', thumbnail: getScreenShot(), config: createConfigFile()}
+				const myConfig = {shoeViewerURL: `${parent.window.location.href}/threecode/viewer2?pid=${parent.window.appData.currentProductID}`, thumbnail: getScreenShot(), config: createConfigFile()}
 
 				parent.window.appData.shoeConfig = {...myConfig};
 				//parent.window.getPDF(myConfig);

@@ -137,25 +137,58 @@ spa.$extend('customizerView', {
   getPDF: function (){
 	
 
+	const pdfModal = document.getElementById('pdf-modal');
+	pdfModal.style.opacity = 1.0;
+	pdfModal.style.zIndex = 500;
+
+
 	const frame = document.getElementById('customizer-iframe');
-	frame.contentWindow.getPDF();
-
+	frame.contentWindow.saveProduct();
+	
 	setTimeout(() => {
-		spa.$render('pdfView');
-		spa.$show('pdfView');
+		frame.contentWindow.getPDF();
 
-	}, 300);
+		setTimeout(() => {
+			spa.$render('pdfView');
+			spa.$show('pdfView');
+	
+		}, 300);
+	
+		setTimeout(() => {
+			html2pdf().from(document.getElementById('spaCompContainer_pdfView_1')).save();
+		}, 350);
 
-	setTimeout(() => {
-		html2pdf().from(document.getElementById('spaCompContainer_pdfView_1')).save();
-	}, 350);
+	}, 2000);
+	
+	
 
-	setTimeout(() => {
+    setTimeout(() => {
 		spa.$hide('pdfView');
-	}, 400);
+		pdfModal.style.opacity = 0;
+		pdfModal.style.zIndex = -1;
+
+	}, 3000);	
 	
 	
 
+  }, 
+
+  handleShare: function() {
+	  const frame = document.getElementById('customizer-iframe');
+	  frame.contentWindow.saveProduct();
+	  
+	  setTimeout(() => {
+
+		const pid = appData.currentProductID;
+
+	  	const url = `${window.location.href}/threecode/viewer2.html?pid=${pid}`;
+	  
+		navigator.clipboard.writeText(url);
+
+	  	window.showToast('Shareable URL copied To Clipboard');
+
+	  }, 2000);
+	  
   }
 
 });
