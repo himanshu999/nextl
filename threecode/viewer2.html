@@ -261,20 +261,25 @@
 										
 										let configg = JSON.parse(config);
 
-										const material = materials.find( matrl => matrl.uuid == configg[child.name].uuid);
+                                        if(configg[child.name]){
+                                        
+                                            const material = materials.find( matrl => matrl.uuid == configg[child.name].uuid);
+                                            
+                                            console.log(material);
+                                            
+                                            if(material)    
+										    child.material = material;
+                                            else{
+                                                child.material = new THREE.MeshStandardMaterial({ color: 0x445566, roughness: 0.9, metalness: 0.1   });
+                                                child.material.color.r = Math.random(100);
+                                                child.material.color.g = Math.random(100);
+                                                child.material.color.b = Math.random(100);
+                                            }
+                                        }else{
+                                            child.material = shoeLaceMaterial;
+                                        }
 
-                                        //const material = materials[configg[child.name].matIndex];
-
-										console.log(material);
-
-										if(material)
-										child.material = material;
-										else{
-											child.material = new THREE.MeshStandardMaterial({ color: 0x445566, roughness: 0.9, metalness: 0.1   });
-											child.material.color.r = Math.random(100);
-											child.material.color.g = Math.random(100);
-											child.material.color.b = Math.random(100);
-										}
+									
 
 									}else{
 										//roughnessMipmapper.generateMipmaps( child.material );
@@ -285,7 +290,7 @@
 									}
 									
 
-									if(child.name.startsWith('pasted__pPlane')) child.material = shoeLaceMaterial;
+									//if(child.name.startsWith('pasted__pPlane')) child.material = shoeLaceMaterial;
 									
 									child.material.needsUpdate = true;
 									console.log(child.name);
