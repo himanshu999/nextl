@@ -182,10 +182,11 @@ spa.$extend('customizerView', {
 		const pid = appData.currentProductID;
 
 	  	const url = `${window.location.href}threecode/viewer2.html?pid=${pid}`;
+
+		window.showToast('Shareable URL copied To Clipboard');  
 	  
 		navigator.clipboard.writeText(url);
 
-	  	window.showToast('Shareable URL copied To Clipboard');
 
 	  }, 2000);
 	  

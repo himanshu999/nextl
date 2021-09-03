@@ -465,6 +465,7 @@
 								
 								if ( child.isMesh ) {
 
+									if(!child.name.startsWith('pasted__pPlane'))
 									config[child.name] = {name: child.material.name, category: child.material.category, uuid: child.material.uuid};
 									
 
@@ -511,7 +512,7 @@
 				
 				//createConfigFile();
 
-				const myConfig = {shoeViewerURL: `${parent.window.location.href}/threecode/viewer2?pid=${parent.window.appData.currentProductID}`, thumbnail: getScreenShot(), config: createConfigFile()}
+				const myConfig = {shoeViewerURL: `${parent.window.location.href}threecode/viewer2?pid=${parent.window.appData.currentProductID}`, thumbnail: getScreenShot(), config: createConfigFile()}
 
 				parent.window.appData.shoeConfig = {...myConfig};
 				//parent.window.getPDF(myConfig);
