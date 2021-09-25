@@ -51,7 +51,7 @@
 	}
 
 	.modal-wrapper {
-	    position: absolute;
+	    position: fixed;
 	    top: 0;
 	    width: 100vw;
 	    height: 100vh;
@@ -366,6 +366,21 @@
 
 	  window.saveMaterial = saveMaterial;
 
+	  function loadClients(){
+		//appData.clients = {};
+
+		firebaseDB.collection("clients").get().then((querySnapshot) => {
+	    	querySnapshot.forEach((doc) => {
+				
+				let keyName = doc.id;
+				let client = {...doc.data(), id: doc.id};
+				appData.clients = appData.clients || {};
+				appData.clients[keyName] = client;
+			});
+
+		});
+	  }
+
 
 	  function loadMaterials(){
 
@@ -393,7 +408,7 @@
 
 			material.images.forEach((imag) => {
 
-				firebaseStorage.refFromURL(imag.url).getDownloadURL().then((url) => {
+				/*firebaseStorage.refFromURL(imag.url).getDownloadURL().then((url) => {
 
 					imag.url = url;
 					//console.log(imag);
@@ -401,15 +416,19 @@
 				})
 				.catch((error) => {
 						// Handle any errors
-				});
+				}); */
+
+				imag.url = `https://firebasestorage.googleapis.com/v0/b/nextl-5bff0.appspot.com/o/${imag.url.split('/').pop()}?alt=media`;
 
 			});
 
-			setTimeout(() => {
+			mat.materialJSON = JSON.stringify(material);
+
+			/*setTimeout(() => {
 				
 				mat.materialJSON = JSON.stringify(material);
 				console.log(mat.materialJSON);
-			}, 1500)
+			}, 1500) */
 			
 		});
 	  
@@ -419,19 +438,19 @@
 
 	  }
 
-	  function loadUserSavedShoes(){
+	  const loadUserSavedShoes = () => {
 
-		firebaseDB.collection("products").orderBy('created_at','desc').get().then((querySnapshot) => {
+		firebaseDB.collection("products").where('shoeID', '==', appData.shoes[appData.currentShoeIndex].id).orderBy('created_at','desc').get().then((querySnapshot) => {
 
 			querySnapshot.forEach((doc) => {
 
 				
 
 				const product = doc.data();
+				const thumbnail = `https://firebasestorage.googleapis.com/v0/b/nextl-5bff0.appspot.com/o/${product.thumbnail.split('/').pop()}?alt=media`;
+				appData.userProducts.push({...product, thumbnail, id: doc.id});
 
-				appData.userProducts.push({...product, id: doc.id});
-
-				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
+				/*firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
 						
 						const foundPr = appData.userProducts.find(p => p.id == doc.id);
 						
@@ -440,23 +459,24 @@
 					})
 					.catch((error) => {
 						// Handle any errors
-					});
+					}); */
 			});
 
 		});
 
 	  }
 
-	  function loadPresetShoes(){
+	  const loadPresetShoes = () => {
 
-		firebaseDB.collection("products").where("preset", "==", true).orderBy('created_at','desc').get().then((querySnapshot) => {
+		firebaseDB.collection("products").where('shoeID', '==', appData.shoes[appData.currentShoeIndex].id).where("preset", "==", true).orderBy('created_at','desc').get().then((querySnapshot) => {
 
 			querySnapshot.forEach((doc) => {
 
 				const product = doc.data();
-				appData.presetShoes.push({...product, id: doc.id});
+				const thumbnail = `https://firebasestorage.googleapis.com/v0/b/nextl-5bff0.appspot.com/o/${product.thumbnail.split('/').pop()}?alt=media`;
+				appData.presetShoes.push({...product, thumbnail, id: doc.id});
 
-				firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
+				/*firebaseStorage.refFromURL(product.thumbnail).getDownloadURL().then((url) => {
 
 				const foundPr = appData.presetShoes.find(p => p.id == doc.id);
 				foundPr.thumbnail = url;
@@ -464,7 +484,9 @@
 				})
 				.catch((error) => {
 				// Handle any errors
-				});
+				}); */
+
+
 			});
 
 		});
@@ -472,15 +494,18 @@
 	}
 
 
+
+	  loadClients();
 	  loadMaterials();
-	  loadUserSavedShoes();
-	  loadPresetShoes();
+	  //loadUserSavedShoes();
+	  //loadPresetShoes();
 	   
 
 
 	  const saveProduct = (product, imgData) => {
 
 		//save thumb image
+		const shoeID = appData.shoes[appData.currentShoeIndex].id;
 
 		let imageRef = firebaseStorage.ref().child(new Date().getTime() + '.jpg');
 
@@ -492,7 +517,7 @@
 
 		if(!appData.currentProductID)
 		//if new product
-		firebaseDB.collection("products").add({...product, thumbnail, created_at: Date.now()})
+		firebaseDB.collection("products").add({...product, shoeID, thumbnail, created_at: Date.now()})
 		.then((docRef) => {
 			console.log("Document written with ID: ", docRef.id);
 			appData.currentProductID = docRef.id;
@@ -502,7 +527,7 @@
 		});
 		else
 		//otherwise update
-		firebaseDB.collection("products").doc(appData.currentProductID).update({...product, thumbnail, created_at: Date.now()})
+		firebaseDB.collection("products").doc(appData.currentProductID).update({...product, shoeID, thumbnail, created_at: Date.now()})
 		.then(() => {
 			console.log("Document updated successfully with ID: ", appData.currentProductID);
 		})
@@ -523,13 +548,15 @@
 
 window.saveProduct = saveProduct;
 window.showToast = showToast;
+window.loadPresetShoes = loadPresetShoes;
+window.loadUserSavedShoes = loadUserSavedShoes;
   </script>
 
   <script>
   var appData = {
     clients: {
 
-	'1233' :{
+	/*'1233' :{
 	  name: 'Nike',
 	  thumbURL: './assets/nike-logo.png',
 	  password: '12345',
@@ -568,7 +595,7 @@ window.showToast = showToast;
 	  name: 'Adidas',
 	  thumbURL: './assets/adidas.png',
 	  password: '12345',
-	}
+	}*/
   }, 
 
   currentClientIndex: -1,

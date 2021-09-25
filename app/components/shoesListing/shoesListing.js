@@ -8,31 +8,45 @@ spa.$('shoesListing', {
 
 spa.$extend('shoesListing', {
 
-   handleShoeCardClick : function (id) {
+   handleShoeCardClick : function (index) {
 	
 	spa.$hide('shoesListing');
 	//spa.$render('customizerView');
+	window.appData.currentShoeIndex = index;
 
-	
-	spa.$render('customizerView', {
+	window.loadPresetShoes();
+	window.loadUserSavedShoes();
 
-	  target: '#spaCompContainer_header_1',
-
-	  getImage: function(obj) {
-	
-	if(obj.materialJSON !== ""){
-		const mat = JSON.parse(obj.materialJSON);	
-		return mat.images[0].url;
-	}
-	return "";
-  },
-
-	}); 
-
-	
 	setTimeout(() => {
-		window.frames[0].loadMaterials();
-	}, 3000);
+
+		console.log(appData.products);
+
+		spa.$render('customizerView', {
+
+			target: '#spaCompContainer_header_1',
+	  
+			getImage: function(obj) {
+		  
+			  if(obj.materialJSON !== ""){
+				  const mat = JSON.parse(obj.materialJSON);	
+				  return mat.images[0].url;
+			  }
+			  
+			  return "";
+			},
+	  
+		  }); 
+
+		  setTimeout(() => {
+			window.frames[0].loadMaterials();
+		}, 1000);
+
+	}, 2000);
+	
+	
+
+	
+	
 	//spa.$show('customizerView');
 	
    }

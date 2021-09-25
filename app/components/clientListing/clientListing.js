@@ -16,6 +16,18 @@ spa.$extend('clientListing', {
 	appData.currentClientIndex = index;
 	const passwordInput= document.getElementById('client-password-input');
 	
+	window.firebaseDB.collection("shoes").where("client", "==", appData.currentClientIndex).get().then((querySnapshot) => {
+		
+		querySnapshot.docs.forEach((doc) => {
+
+			const shoe = { ...doc.data(), id: doc.id };
+
+			appData.shoes = [];
+			appData.shoes.push(shoe);
+
+		})
+		
+	});
 	
 	
   }, 
@@ -27,7 +39,8 @@ spa.$extend('clientListing', {
 
 	if(el.value === clients[currentClientIndex].password){
 		
-		spa.$hide('clientListing');	
+		spa.$hide('clientListing');
+		spa.$render('shoesListing');	
 		spa.$show('shoesListing');
 	}
 	

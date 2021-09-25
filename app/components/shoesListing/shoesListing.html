@@ -10,10 +10,9 @@
     <div class="container-fluid mt--7">
       <div class="row">
        
-	{{#each _global_.appData.clients.1233.shoes }}
+	{{#each _global_.appData.shoes }}
 	
-	
-        <div onclick="{$}handleShoeCardClick('{{@key}}')" class="col-xl-4 brand-card mb-6">
+        <div onclick="{$}handleShoeCardClick('{{@index}}')" class="col-xl-4 brand-card mb-6">
           <div class="card shadow">
             <div class="card-header bg-gradient-default">
               <div class="row align-items-center">
@@ -23,7 +22,7 @@
                 </div>
               </div>
             </div>
-            <div style="background-image: url('./assets/shoe-type-1.png')" class="card-body">
+            <div style="background-image: url('{{this.thumbURL}}')" class="card-body">
              
             </div>
           </div>

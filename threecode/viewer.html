@@ -28,7 +28,7 @@
 			
 		</style>
 		<script>
-		 var camerag, selectedPart;
+		 var camerag, selectedPart, sceneg;
 		</script>
 	</head>
 
@@ -55,11 +55,16 @@
 
 			let materials = [];
 
-			const newProductData = {shoeURL: './assets/shoe.glb'};
+			const newProductData = {shoeURL: window.parent.appData.shoes[window.parent.appData.currentShoeIndex].modelURL};
 
 			let productData = undefined;
 
 			let shoeLaceMaterial;
+
+			const camPositions = {
+				'fv': {x: -15, y: 5, z: -345},
+				'tv': {x: -2, y: 347, z: -33}, 
+			}
 
 			init();
 			
@@ -70,6 +75,7 @@
 				scene = new THREE.Scene();
 				//scene.background = new THREE.Color( 0xcccccc );
 				scene.background = null;
+				sceneg = scene;
 				
 
 				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true, preserveDrawingBuffer: true } );
@@ -189,7 +195,7 @@
 
 							} ); 
 							
-							gltf.scene.scale.set(40,40,40);
+							gltf.scene.scale.set(6,6,6);
 							//gltf.scene.position.set(0,-30,0);
 
 							
@@ -491,6 +497,7 @@
 
 				scene.remove(model);
 				productData = pData;
+				productData.shoeURL = window.parent.appData.shoes[window.parent.appData.currentShoeIndex].modelURL;
 				loadShoeModel();
 				//init();
 				animate();
@@ -499,11 +506,13 @@
 			const getScreenShot = () => {
 				
 				const originalCamPos = camera.position.clone();
-				camera.position.set(267, 37, 81);
+				camera.position.set(182, 182, -365);
+				camera.updateProjectionMatrix();
+				console.log('trying to change camera pos');
 				var strMime = "image/jpeg";
 				const imgData = renderer.domElement.toDataURL(strMime);
 		
-				camera.position.copy(originalCamPos);
+				//camera.position.copy(originalCamPos);
 				
 				return imgData;
 			}
@@ -520,6 +529,17 @@
 
 			}
 
+			const changeCamPosition = (posName) => {
+				const pos = camPositions[posName];
+				camera.position.set(pos.x, pos.y, pos.z);
+				//animate();
+			}
+
+			const resetShoeDesign = () => {
+				loadShoeModel();
+			}
+
+
 			window.saveProduct = saveProduct;
 
 			window.createConfigFile = createConfigFile;
@@ -533,6 +553,8 @@
 			window.getScreenShot = getScreenShot;
 
 			window.getPDF = getPDF;
+
+			window.changeCamPosition = changeCamPosition;
 			
 
 		</script>
