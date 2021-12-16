@@ -49,6 +49,12 @@ spa.$extend('shoesListing', {
 	
 	//spa.$show('customizerView');
 	
+   }, 
+
+   goBack: function(){
+	   spa.$hide('shoesListing');
+	   spa.$render('clientListing');  
+	   spa.$show('clientListing');
    }
   
 

@@ -1,28 +1,21 @@
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+<div style="background:black" class="header pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
-    <div class="header-body">
-      <h1 class="text-center text-white mb-5 mt-0">Select Your Shoe</h1> 
+    <div class="header-body text-center">
+      <h1 style="display:inline" class="text-center text-white mb-5 mt-0">Select Your Shoe</h1>
+      <span id="clientnameshoeslisting">{{_global_.appData.currentClientName}} 
     </div>
   </div>
 </div>
 	
     <!-- Page content -->
-    <div class="container-fluid mt--7">
+    <div style="background:black; min-height:100vh" class="container-fluid mt--7 pt-5">
       <div class="row">
        
 	{{#each _global_.appData.shoes }}
 	
-        <div onclick="{$}handleShoeCardClick('{{@index}}')" class="col-xl-4 brand-card mb-6">
+        <div onclick="{$}handleShoeCardClick('{{@index}}')" class="col-md-4 brand-card mb-6">
           <div class="card shadow">
-            <div class="card-header bg-gradient-default">
-              <div class="row align-items-center">
-                <div class="col">
-                  
-                  <h3 class="mb-0 text-center text-white">{{ this.name }}</h3>
-                </div>
-              </div>
-            </div>
-            <div style="background-image: url('{{this.thumbURL}}')" class="card-body">
+            <div style="background-image: url('{{this.thumbURL}}'); padding-top:100%" class="card-body">
              
             </div>
           </div>
@@ -34,3 +27,9 @@
 	
 
       </div>
+
+      </span>
+      </div>
+
+      <button style="left:0; bottom:5vh; position:fixed" onclick="{$}goBack()" class="btn btn-back"><i class="fa fa-arrow-left mr-1"></i>Back</button>
+      <!--<button style="right:0; bottom:5vh; position:fixed" onclick="{$}()" class="btn btn-primary">Proceed</button>-->

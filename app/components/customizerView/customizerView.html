@@ -5,7 +5,7 @@
 </div>
 <nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
 	<div id="mat-holder" class="">
-		<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>
+		<!--<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>-->
 		<ul id="mat-list" class="navbar-nav">
 			
 			<li class="nav-item">
@@ -15,14 +15,30 @@
 			  <div class="container">
 			  <div class="row">
 				{{#:each _global_.appData.materials}}	
-				<div onclick="{$}changeMaterial({{@index}})" class="col-xl-4 text-center mat-thumb-hldr">
+				<div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
 					<div style="background-image:url({{:fn '{$}getImage' this }})" class="mat-thumb"></div>
-					<span>Type {{@index}}</span>
+					<span>{{this.name}}</span>
 				</div>
 				{{/:each}}			
 			  </div>
 			  </div>
 			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="#">
+				  Fabric
+				</a>
+				<div class="container">
+				<div class="row">
+				  {{#:each _global_.appData.materials}}	
+				  <div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
+					  <div style="background-image:url({{:fn '{$}getImage' this }})" class="mat-thumb"></div>
+					  <span>{{this.name}}</span>
+				  </div>
+				  {{/:each}}			
+				</div>
+				</div>
+			  </li>
 			
       		</ul>
 	</div>
@@ -37,7 +53,7 @@
 			  <div class="container">
 			  <div class="row">
 				{{#each	_global_.appData.userProducts}}			
-				<div onclick="{$}loadShoe({{@index}}, false)" class="col-xl-6 text-center mat-thumb-hldr">
+				<div onclick="{$}loadShoe({{@index}}, false)" class="col-md-6 text-center mat-thumb-hldr">
 					<div style="background-image:url({{this.thumbnail}})" class="preset-thumb"></div>
 					
 				</div>
@@ -60,7 +76,7 @@
 			  <div class="container">
 			  <div class="row">
 				{{#each	_global_.appData.presetShoes}}			
-				<div onclick="{$}loadShoe({{@index}}, true)" class="col-xl-6 text-center mat-thumb-hldr">
+				<div onclick="{$}loadShoe({{@index}}, true)" class="col-md-6 text-center mat-thumb-hldr">
 					<div style="background-image:url({{this.thumbnail}})" class="preset-thumb"></div>
 					
 				</div>
@@ -74,16 +90,17 @@
 	</div>
   </nav>
 
-  <button style="top:4px; right: 354px;" class="abs-btns btn"><i class="fa fa-eye"></i>View AR</button>
-  <button onclick="{$}handleShare()" style="bottom:92px; right: 356px;" class="abs-btns btn"><i class="fa fa-share-alt"></i>Share</button>
-  <button onclick="{$}getPDF()" style="bottom:24px; right: 350px;" class="abs-btns btn"><i class="fa fa-download"></i>Get PDF</button>
+  <button style="top:4px; right: 354px;" class="abs-btns btn"><i class="" style="background-image: url('./assets/icons8-augmented-reality-96_be@2x.png'); margin-bottom:0; height:30px"></i>View AR</button>
+  <button onclick="{$}handleShare()" style="bottom:163px; right: 356px;" class="abs-btns btn"><i class="" style="background-image: url('./assets/icons8-share-384@2x.png')"></i>Share</button>
+  <button onclick="{$}saveProduct()" style="bottom:92px; right: 356px;" class="abs-btns btn"><i class="" style="background-image: url('./assets/icons8-save-96@2x.png')"></i>Save</button>
+  <button onclick="{$}getPDF()" style="bottom:24px; right: 347px;" class="abs-btns btn"><i class="" style="background-image: url('./assets/icons8-pdf-52@2x.png')"></i>Get PDF</button>
 
   <nav id="sidenav2" class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white">
 	<div id="three-btn-hldr">
 		<!--<span>View in AR</span>-->
-		<i id="showMatBtn" onclick="{$}showMaterials()" class="fas fa-tshirt selected"></i>
-		<i id="showSavedBtn" onclick="{$}showSavedShoes()" class="fas fa-heart"></i>
-		<i id="showPresetBtn" onclick="{$}showPresetShoes()" class="fas fa-heart"></i>
+		<i id="showMatBtn" style="background-image: url('./assets/frwrw@2x.png')" onclick="{$}showMaterials()" class="selected"></i>
+		<i id="showSavedBtn" style="background-image: url('./assets/n_@2x.png')" onclick="{$}showSavedShoes()" class=""></i>
+		<i id="showPresetBtn" style="background-image: url('./assets/rwr@2x.png')" onclick="{$}showPresetShoes()" class=""></i>
 		<!--<span>Download</span>-->
 	</div>
 	

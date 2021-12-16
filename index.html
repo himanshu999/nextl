@@ -31,23 +31,31 @@
 	.brand-card{
 		text-align:center;
 		cursor: pointer;
-
+		z-index: 10;
 	}
 
 	.brand-card .card-body{
-	
 	    background-position: center center;
-	    background-size:contain;
-	    background-repeat: no-repeat;
-	    padding-top:100%;
-	    padding-bottom: 0;
+		background-size: 65%;
+		background-repeat: no-repeat;
+		padding-top: 77%;
+		padding-bottom: 0;
+		border-radius: 0 0 23px 23px;
+		background-color: #000000e0;
 
 	}
 
 	.brand-card .card.shadow{
-	 	width:80%;
-		margin:auto;
-		border: none;
+		width: 62%;
+    	margin: auto;
+    	border: none;
+		border-radius: 26px;
+	}
+
+	.brand-card .card-header{
+		background: #000000e0 !important;
+ 	    border: none;
+
 	}
 
 	.modal-wrapper {
@@ -56,15 +64,17 @@
 	    width: 100vw;
 	    height: 100vh;
 	    z-index: -1;
-	    background: #000000ad;
-	    backdrop-filter: blur(8px);
+	    /*background: #000000ad;
+	    backdrop-filter: blur(8px);*/
+		background-color: black;
 	    transition: opacity 0.3s ease-in-out;
 	    opacity: 0;
 	}
 	
 	.modal-body{
-	   margin-top: 43vh;
-           text-align: center;
+	   margin-top: 15vh;
+        text-align: center;
+		z-index: 10;
 
 	}
 
@@ -113,6 +123,12 @@
 	    display: block;
 	    cursor:pointer;
 	    transition: all 0.3s ease-in-out;
+		background-size: contain !important;
+		background-repeat: no-repeat !important;
+		background-position: center center !important;
+		height: 40px;
+		width:32px;
+
        }
 
 	#sidenav2 i.selected{
@@ -120,7 +136,7 @@
 	}
 
 	#sidenav2 i:hover{
-	   color: blueviolet;
+	   contrast: blueviolet;
 	}
 
 	#three-btn-hldr{
@@ -239,6 +255,10 @@
     /* text-transform: UPPERCASE; */
     margin: 5px 0;
     font-size: 16px;
+	background-size: contain;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 #spaCompContainer_pdfView_1{
@@ -264,6 +284,93 @@
 
 .toast.show{
 	opacity: 1.0;
+}
+
+#main-bg{
+	background: url(../assets/shoebg.jpg);
+    background-size: contain;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-position-y: 10vh;
+}
+
+#main-text{
+	width: 19rem;
+    position: absolute;
+    margin-left: 1rem;
+    top: 26vh;
+}
+
+#main-text p {
+	color: white;
+    font-size: 1.6rem;
+}
+
+#main-text .btn{
+	background: #2c32c0;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 40px;
+	margin-top: 8px;
+}
+
+#main-logo{
+	width: 165px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.btn-back{
+	background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: 7px 23px;
+    position: absolute;
+    margin-left: 7%;
+	z-index: 5;
+}
+
+.logo-hldr {
+    width: 200px;
+    height: 200px;
+    /* background: red; */
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    /* text-align: center; */
+    border: 2px solid white;
+	background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#clientnameshoeslisting{
+	position: absolute;
+    left: 8vw;
+    border: 3px solid #2c32c0;
+    padding: 0.2rem 2rem;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.main-content .navbar-top{
+	position: fixed !important;
+}
+
+.blue-gradient-div{
+	position: fixed;
+    left: -450px;
+    top: -450px;
+    background: rgb(41,41,219);
+    background: radial-gradient(circle, rgba(41,41,219,1) 0%, rgba(0,0,0,1) 67%);
+    height: 900px;
+    width: 900px;
+    z-index: 1;
 }
 
 	
