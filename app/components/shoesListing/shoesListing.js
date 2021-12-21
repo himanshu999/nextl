@@ -39,7 +39,7 @@ spa.$extend('shoesListing', {
 
 		  setTimeout(() => {
 			window.frames[0].loadMaterials();
-		}, 1000);
+		}, 5000);
 
 	}, 2000);
 	
