@@ -35,27 +35,29 @@
 	}
 
 	.brand-card .card-body{
-	    background-position: center center;
-		background-size: 65%;
+	    background-position: center 10%;
+		background-size: 55%;
 		background-repeat: no-repeat;
-		padding-top: 77%;
+		padding-top: 70%;
 		padding-bottom: 0;
-		border-radius: 0 0 23px 23px;
+		border-radius: 0 0 43px 43px;
 		background-color: #000000e0;
-
 	}
+
+
 
 	.brand-card .card.shadow{
 		width: 62%;
-    	margin: auto;
-    	border: none;
-		border-radius: 26px;
+		margin: auto;
+		border: none;
+		border-radius: 44px;
+		max-width: 210px;
 	}
 
 	.brand-card .card-header{
 		background: #000000e0 !important;
  	    border: none;
-
+		border-radius: 43px 43px 0 0;
 	}
 
 	.modal-wrapper {
@@ -90,10 +92,17 @@
 	    border-radius: 30px;
 	    background: transparent;
 	    border: 2px solid #bfbebe;
-	    font-size: 1.1rem;
+	    font-size: 1rem;
 	    text-align: center;
 	    color: white;
 	    padding: 1.5rem;
+	}
+
+	#client-pass-ipg .fa{	
+		color: #ffffffd1;
+		display: inline;
+		margin: 1rem 0 0 -2.5rem;
+		font-size: 1.1rem;
 	}
 	
 	#sidenav-main{
@@ -287,19 +296,22 @@
 }
 
 #main-bg{
-	background: url(../assets/shoebg.jpg);
-    background-size: contain;
+	background: url(./assets/shoebg.jpg);
+    background-size: 95%;
     height: 100vh;
     background-repeat: no-repeat;
     background-color: black;
     background-position-y: 10vh;
+	background-position-x: 70%;
 }
+
+
 
 #main-text{
 	width: 19rem;
     position: absolute;
-    margin-left: 1rem;
-    top: 26vh;
+    margin-left: 5%;
+    top: 23%;
 }
 
 #main-text p {
@@ -310,16 +322,16 @@
 #main-text .btn{
 	background: #2c32c0;
     border: none;
-    border-radius: 30px;
+    border-radius: 100px;
     padding: 10px 40px;
 	margin-top: 8px;
 }
 
 #main-logo{
-	width: 165px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	width: 4%;
+    position: absolute;
+    bottom: 8%;
+    left: 5.5%;
 }
 
 .btn-back{
@@ -329,13 +341,13 @@
     border-radius: 30px;
     padding: 7px 23px;
     position: absolute;
-    margin-left: 7%;
+    margin-left: 5%;
 	z-index: 5;
 }
 
 .logo-hldr {
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 170px;
     /* background: red; */
     border-radius: 50%;
     margin-left: 50%;
@@ -371,6 +383,28 @@
     height: 900px;
     width: 900px;
     z-index: 1;
+}
+
+@media screen and (min-width: 1900px) {
+  #main-bg {
+    background-position-y: 35%;
+  }
+
+  #main-text{
+	top: 15%;
+
+  }
+
+  #main-text p {
+	font-size: 4rem;
+    width: 38rem;
+  }
+
+  #main-text .btn{
+	font-size: 2.5rem;
+    padding: 1.5rem 5rem;
+	margin-top: 3rem;
+  }
 }
 
 	
