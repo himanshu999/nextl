@@ -13,7 +13,7 @@
 			    Leather
 			  </a>
 			  <div class="container">
-			  <div class="row">
+			  <div class="row p-3">
 				{{#:each _global_.appData.materials}}	
 				<div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
 					<div style="background-image:url({{:fn '{$}getImage' this }})" class="mat-thumb"></div>
@@ -29,7 +29,7 @@
 				  Fabric
 				</a>
 				<div class="container">
-				<div class="row">
+				<div class="row p-3">
 				  {{#:each _global_.appData.materials}}	
 				  <div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
 					  <div style="background-image:url({{:fn '{$}getImage' this }})" class="mat-thumb"></div>
