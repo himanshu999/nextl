@@ -402,6 +402,48 @@
 	font-weight: 600;
 }
 
+#orientation-hldr{
+	position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translate(calc(-50% - 175px));
+    width: 300px;
+    height: 68px;
+	cursor: pointer;
+	z-index: 100;
+}
+
+#orientation-hldr div{
+	opacity: 0.4;
+	background-size: 80%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#left-buttons-hldr{
+	position: absolute;
+    left: 4%;
+    top: 50%;
+    transform: translate(0, -50%);
+	cursor: pointer;
+	z-index: 100;
+}
+
+#left-buttons-hldr .left-button{
+	font-size: 10px;
+    text-align: center;
+    padding-top: 81%;
+    height: 30px;
+    font-weight: 600;
+    color: black;
+    width: 30px;
+    display: block;
+    background-size: 70%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
 @media screen and (min-width: 1900px) {
   #main-bg {
     background-position-y: 35%;
