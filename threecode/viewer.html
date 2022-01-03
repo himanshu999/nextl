@@ -28,7 +28,7 @@
 			
 		</style>
 		<script>
-		 var camerag, selectedPart, sceneg;
+		 var camerag, selectedPart, sceneg, opStackg, undoCounterg;
 		</script>
 	</head>
 
@@ -61,7 +61,9 @@
 
 			let shoeLaceMaterial;
 
-			let opStack = [];
+			let opStack = [], undoCounter = 0, opStackMaxSize = 8 ;
+
+			opStackg = opStack; undoCounterg = undoCounter;
 
 			const camPositions = {
 				'1': {x: -99, y: 4, z: 5},
@@ -396,8 +398,13 @@
 		
 
 			const changeMaterial = (mat) => { 
-					
 				
+				undoCounter = 0;
+
+				if(opStack.length === opStackMaxSize) opStack.shift();
+
+				opStack.push({ currentMat: mat.uuid, selectedPart: selectedPart});
+
 				const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
 				//const material = materials[index];
 				
@@ -405,7 +412,7 @@
 				
 				selectedPart.material.needsUpdate = true;
 
-				opStack.push({mat: mat, selectedPart: selectedPart});
+				
 				
 			}
 
@@ -563,9 +570,47 @@
 
 			const undoFunction = () => {
 		
-				opStack.pop();
-				changeMaterial2(opStack[opStack.length -1]);
+
+				const opObj = opStack[opStack.length - 2 - undoCounter];
+
+				//const mat = obj.mat;
+
+				if(opObj) {
+
+					const material = materials.find((matrl) => (matrl.uuid === opObj.currentMat));
+					
+					opObj.selectedPart.material = material;
+					
+					opObj.selectedPart.material.needsUpdate = true;
+
+				undoCounter++;
+
+				}
+				
 			}
+
+			const redoFunction = () => {
+		
+
+		const opObj = opStack[opStack.length - 1 - undoCounter];
+
+		//const mat = obj.mat;
+
+		if(opObj) {
+
+			const material = materials.find((matrl) => (matrl.uuid === opObj.currentMat));
+
+			console.log(material);
+			
+			opObj.selectedPart.material = material;
+			
+			opObj.selectedPart.material.needsUpdate = true;
+
+			undoCounter--;
+
+		}
+		
+	}
 
 
 			window.saveProduct = saveProduct;
@@ -587,6 +632,8 @@
 			window.resetShoeDesign = resetShoeDesign;
 
 			window.undoFunction = undoFunction;
+
+			window.redoFunction = redoFunction;
 			
 
 		</script>
