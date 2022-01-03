@@ -3,16 +3,17 @@
 		<h3 style="color:#ddd">Generating PDF...</h3>	
 	</div>
 </div>
-<nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white" id="sidenav-main">
+<nav class="navbar navbar-vertical fixed-right navbar-expand-md navbar-light bg-white pt-0" id="sidenav-main">
 	<div id="mat-holder" class="">
+		<h3 style="background-color: #5f5f5f; color: white; margin: 0 -3rem 2rem -3rem !important;" class="text-center p-3">Materials List</h3>
 		<!--<button onclick="{$}saveProduct()" style="width:100%" class="btn btn-primary mb-4">Save</button>-->
 		<ul id="mat-list" class="navbar-nav">
 			
 			<li class="nav-item">
-			  <a class="nav-link" href="#">
-			    Leather
+			  <a data-d-id="111" onclick="{$}toggleDropDown('111')" class="nav-link" href="#">
+			    Leather<i class="fa fa-angle-down"></i>
 			  </a>
-			  <div class="container">
+			  <div id="111" class="container">
 			  <div class="row p-3">
 				{{#:each _global_.appData.materials}}	
 				<div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
@@ -25,10 +26,10 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="#">
-				  Fabric
+				<a data-d-id="222" onclick="{$}toggleDropDown('222')" class="nav-link" href="#">
+				  Fabric<i class="fa fa-angle-left"></i>
 				</a>
-				<div class="container">
+				<div style="display:none" id="222" class="container">
 				<div class="row p-3">
 				  {{#:each _global_.appData.materials}}	
 				  <div onclick="{$}changeMaterial({{@index}})" class="col-md-4 text-center mat-thumb-hldr">
@@ -107,18 +108,18 @@
   </nav>
 
   <div id="orientation-hldr" class="row">
-	  <div style="background-image: url(./assets/1.png)" class="col-md-3"></div>
-	  <div style="background-image: url(./assets/2.png)" class="col-md-3"></div>
-	  <div style="background-image: url(./assets/3.png)" class="col-md-3"></div>
-	  <div style="background-image: url(./assets/4.png)" class="col-md-3"></div>
+	  <div onclick="{$}changeCamPosition(1)" style="background-image: url(./assets/1.png)" class="col-md-3"></div>
+	  <div onclick="{$}changeCamPosition(2)" style="background-image: url(./assets/2.png)" class="col-md-3"></div>
+	  <div onclick="{$}changeCamPosition(3)" style="background-image: url(./assets/3.png)" class="col-md-3"></div>
+	  <div onclick="{$}changeCamPosition(4)" style="background-image: url(./assets/4.png)" class="col-md-3"></div>
   </div>
 
   <div id="left-buttons-hldr">
 	<div style="background-image: url(./assets/icons8-zoom-in-96.png)" class="left-button"></div>
 	<div style="background-image: url(./assets/icons8-zoom-out-96.png)" class="left-button mb-3"></div>
-	<div style="background-image: url(./assets/icons8-undo-96.png); opacity: 0.3" class="left-button mb-2">Undo</div>
-	<div style="background-image: url(./assets/icons8-redo-96.png); opacity: 0.3" class="left-button mb-4">Redo</div>
-	<div style="background-image: url(./assets/icons8-reset-96.png); background-size: 53%;" class="left-button">Reset</div>
+	<div onclick="{$}undoFunction()" style="background-image: url(./assets/icons8-undo-96.png); opacity: 0.3" class="left-button mb-2">Undo</div>
+	<div onclick="{$}redoFunction()" style="background-image: url(./assets/icons8-redo-96.png); opacity: 0.3" class="left-button mb-4">Redo</div>
+	<div onclick="{$}resetShoeDesign()" style="background-image: url(./assets/icons8-reset-96.png); background-size: 53%;" class="left-button">Reset</div>
   </div>
 
  <div class="header pb-8 pt-5 pt-md-8">

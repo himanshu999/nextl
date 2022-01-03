@@ -190,7 +190,43 @@ spa.$extend('customizerView', {
 
 	  }, 2000);
 	  
-  }
+  }, 
+
+  toggleDropDown: function(elid) {
+	const el = document.getElementById(elid);
+	const parentEl = document.querySelectorAll(`[data-d-id='${elid}']`)[0];
+	
+	if(el.style.display === 'none'){
+		el.style.display = 'block';
+		parentEl.children[0].classList.remove('fa-angle-left');
+		parentEl.children[0].classList.add('fa-angle-down');
+	}else{
+		el.style.display = 'none';
+		parentEl.children[0].classList.remove('fa-angle-down');
+		parentEl.children[0].classList.add('fa-angle-left');
+	}
+	
+}, 
+
+changeCamPosition: function(posName){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.changeCamPosition(posName);
+}, 
+
+resetShoeDesign: function(){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.resetShoeDesign();
+}, 
+
+undoFunction : function(){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.undoFunction();
+}, 
+
+redoFunction : function(){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.redoFunction();
+}
 
 });
 

@@ -61,9 +61,13 @@
 
 			let shoeLaceMaterial;
 
+			let opStack = [];
+
 			const camPositions = {
-				'fv': {x: -15, y: 5, z: -345},
-				'tv': {x: -2, y: 347, z: -33}, 
+				'1': {x: -99, y: 4, z: 5},
+				'2': {x: 97, y: 8, z: 18},
+				'3': {x: -2, y: 99, z: 0},
+				'4': {x: -1, y: -99, z: 0}, 
 			}
 
 			init();
@@ -73,7 +77,7 @@
 			function init() {
 
 				scene = new THREE.Scene();
-				//scene.background = new THREE.Color( 0xcccccc );
+				//scene.background = new THREE.Cocgcor( 0xcccccc );
 				scene.background = null;
 				sceneg = scene;
 				
@@ -400,7 +404,24 @@
 				selectedPart.material = material;
 				
 				selectedPart.material.needsUpdate = true;
+
+				opStack.push({mat: mat, selectedPart: selectedPart});
 				
+			}
+
+			const changeMaterial2 = (obj) => {
+
+				console.log(obj);
+				
+				const mat = obj.mat;
+				
+				const material = materials.find((matrl) => (matrl.uuid === mat.uuid));
+
+				console.log(material);
+				
+				obj.selectedPart.material = material;
+				
+				obj.selectedPart.material.needsUpdate = true;
 			}
 
 			const loadMaterials = () => {
@@ -536,7 +557,14 @@
 			}
 
 			const resetShoeDesign = () => {
+				scene.remove(model);
 				loadShoeModel();
+			}
+
+			const undoFunction = () => {
+		
+				opStack.pop();
+				changeMaterial2(opStack[opStack.length -1]);
 			}
 
 
@@ -555,6 +583,10 @@
 			window.getPDF = getPDF;
 
 			window.changeCamPosition = changeCamPosition;
+
+			window.resetShoeDesign = resetShoeDesign;
+
+			window.undoFunction = undoFunction;
 			
 
 		</script>
