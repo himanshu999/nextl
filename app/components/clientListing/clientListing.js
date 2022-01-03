@@ -72,6 +72,16 @@ spa.$extend('clientListing', {
 	document.getElementById('client-pass-modal').style.opacity = 0;
 	document.getElementById('client-pass-modal').style.zIndex = -1;
 	
+  }, 
+
+  togglePassVisibility: function(){
+	  const inputEl = document.getElementById('client-pass-ipg').children[0].children[0];
+
+	  if (inputEl.type === "password") {
+		inputEl.type = "text";
+	  } else {
+		inputEl.type = "password";
+	  }
   }
 
 });
