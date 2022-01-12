@@ -1,4 +1,4 @@
-<div style="background:black" class="header pb-8 pt-5 pt-md-5">
+<div style="background:black" class="header pb-8 pt-5 pt-md-5 pt-xl-6">
   <div class="container-fluid">
     <div class="header-body text-center">
       <h1 style="display:inline" class="text-center text-white mb-5 mt-0">Select Your Shoe</h1>
@@ -13,9 +13,9 @@
        
 	{{#each _global_.appData.shoes }}
 	
-        <div onclick="{$}handleShoeCardClick('{{@index}}')" class="col-md-4 brand-card mb-6">
+        <div onclick="{$}handleShoeCardClick('{{@index}}')" class="col-md-4 brand-card mb-6 shoes-card">
           <div class="card shadow">
-            <div style="background-image: url('{{this.thumbURL}}'); padding-top:100%" class="card-body">
+            <div style="background-image: url('{{this.thumbURL}}');" class="card-body">
              
             </div>
           </div>
@@ -31,5 +31,5 @@
       </span>
       </div>
 
-      <button style="left:0; bottom:5vh; position:fixed" onclick="{$}goBack()" class="btn btn-back"><i class="fa fa-arrow-left mr-1"></i>Back</button>
+      <button style="left:0; bottom:5vh; position:fixed; top:unset" onclick="{$}goBack()" class="btn btn-back"><i class="fa fa-angle-left mr-3"></i>Back</button>
       <!--<button style="right:0; bottom:5vh; position:fixed" onclick="{$}()" class="btn btn-primary">Proceed</button>-->

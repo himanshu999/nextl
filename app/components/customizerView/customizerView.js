@@ -156,16 +156,16 @@ spa.$extend('customizerView', {
 	
 		setTimeout(() => {
 			html2pdf().from(document.getElementById('spaCompContainer_pdfView_1')).save();
-		}, 350);
+		}, 600);
 
 	}, 2000);
 	
 	
 
     setTimeout(() => {
-		spa.$hide('pdfView');
-		pdfModal.style.opacity = 0;
-		pdfModal.style.zIndex = -1;
+		//spa.$hide('pdfView');
+		//pdfModal.style.opacity = 0;
+		//pdfModal.style.zIndex = -1;
 
 	}, 3000);	
 	
@@ -226,6 +226,16 @@ undoFunction : function(){
 redoFunction : function(){
 	const frame = document.getElementById('customizer-iframe');
 	frame.contentWindow.redoFunction();
+}, 
+
+zoomIn : function(dollyScale){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.dollyIn(dollyScale);
+}, 
+
+zoomOut : function(dollyScale){
+	const frame = document.getElementById('customizer-iframe');
+	frame.contentWindow.dollyIn(dollyScale);
 }
 
 });

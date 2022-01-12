@@ -7,7 +7,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="./assets/main.css">
+		<!--<link type="text/css" rel="stylesheet" href="./assets/main.css">-->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
 		
 		<style>
@@ -166,8 +166,12 @@
 									if(config){
 										
 										let configg = JSON.parse(config);
+										let material = undefined;
 
-										const material = materials.find( matrl => matrl.uuid == configg[child.name].uuid);
+										if(configg[child.name])
+										material = materials.find( (matrl) => {
+											return matrl.uuid == configg[child.name].uuid
+										});
 
 										console.log(material);
 
@@ -516,7 +520,10 @@
 			}
 
 			const saveProduct = () => {
+				
 				let product = {name: 'Some Name', clientID: 'sss', shoeID: 'dddd', configFile: JSON.stringify(createConfigFile())};
+
+				console.log(product);
 
 				parent.window.saveProduct(product, getScreenShot());
 			}
@@ -612,6 +619,12 @@
 		
 	}
 
+			const dollyIn = (dollyScale) => {
+				controls.dollyInn(dollyScale);
+			}
+
+			
+
 
 			window.saveProduct = saveProduct;
 
@@ -634,6 +647,9 @@
 			window.undoFunction = undoFunction;
 
 			window.redoFunction = redoFunction;
+
+			window.dollyIn = dollyIn;
+
 			
 
 		</script>

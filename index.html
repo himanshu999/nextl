@@ -60,6 +60,17 @@
 		border-radius: 43px 43px 0 0;
 	}
 
+	.brand-card.shoes-card .card{
+		background-color: transparent;
+	}
+
+	.brand-card.shoes-card .card-body{
+		background-color: transparent;
+		padding-top: 100%;
+		background-position: center center;
+		background-size: 100%;
+	}
+
 	.modal-wrapper {
 	    position: fixed;
 	    top: 0;
@@ -278,8 +289,10 @@
 }
 
 #spaCompContainer_pdfView_1{
-	/*position: absolute;*/
-	z-index:-1;
+	position: fixed;
+	width: 100vw;
+	z-index:10000;
+	top: 0;
 }
 
 .toast{
@@ -451,8 +464,51 @@
     opacity: 0.5;
 }
 
+#pdf-bg-hldr{
+	background-position: center 18%;
+	background-size:90%;
+	background-repeat: no-repeat;
+}
+
+.pdf-mat-item{
+	width: 100%;
+	margin: 1rem 0;
+
+}
+
+.pdf-mat-item .mat-name{
+
+	font-size: 1.2rem;
+    color: grey;
+    display: inline-block;
+
+}
+
+.pdf-mat-item .img-hldr{
+	background-image: url(./assets/nextllogo.png);
+    display: flex;
+    margin-left: 4rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 15%;
+    /* background: red; */
+    background-color: black;
+    background-size: cover;
+}
+
+#pdf-mat-list-hldr{
+	background: white;
+}
+
+
+
 @media screen and (min-width: 1900px) {
-  #main-bg {
+
+	h1{
+		font-size: 3rem;
+	}
+  
+	#main-bg {
     background-position-y: 35%;
   }
 
@@ -462,15 +518,90 @@
   }
 
   #main-text p {
-	font-size: 4rem;
-    width: 38rem;
+	font-size: 3.1rem;
+    width: 39rem;
+    line-height: 4.5rem;
   }
 
   #main-text .btn{
-	font-size: 2.5rem;
-    padding: 1.5rem 5rem;
-	margin-top: 3rem;
+	font-size: 1.4rem;
+    padding: 1rem 3rem;
+    margin-top: 2rem;
   }
+
+  #main-logo{
+	  width: 5%;
+  }
+
+  .btn-back{
+	font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+    /* border-radius: 100px; */
+    border-width: 4px;
+    top: 2%;
+}
+
+	
+	.brand-card .card.shadow{
+
+		border-radius: 18%;
+    	max-width: 350px;
+
+	}
+
+	.brand-card .card.shadow h3{
+		font-size: 2rem;
+    	margin-top: 1rem;
+	}
+
+
+	.logo-hldr{
+		width: 300px;
+    border-width: 4px;
+    height: 300px;
+	}
+
+	#client-pass-ipg{
+		width: 35rem;
+    	margin-top: 3rem;
+	}
+
+	#client-pass-ipg .form-control{
+		text-align: left;
+		width: 100%;
+		font-size: 1.5rem;
+		padding: 2.7rem;
+		border-radius: 100px;
+		border-width: 4px;
+	}
+
+	#client-pass-ipg .fa{
+		font-size: 2.3rem;
+    	margin: 1.8rem 0 0 -5rem;
+	}
+
+	#remmediv{
+		margin-top: 1.5rem !important;
+	}
+
+	#remmediv input{
+		width: 1.5rem;
+		height: 1.5rem;
+		margin: 0 1rem 0 2rem;
+	}
+
+	#remmediv span{
+		font-size: 1.7rem;
+	}
+
+	#clientnameshoeslisting{
+		font-size: 2.6rem;
+    padding: 0.4rem 4rem;
+    border-radius: 100px;
+    border-width: 7px;
+
+	}
+  
 }
 
 	

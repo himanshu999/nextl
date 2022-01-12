@@ -1,59 +1,20 @@
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body text-center">
-        <!-- Card stats -->
-        <img class="text-center" src="{{_global_.appData.shoeConfig.thumbnail}}" width=300 />
-        
-        
-      </div>
-    </div>
-  </div>
+
+      <!--<img class="text-center" src="{{_global_.appData.shoeConfig.thumbnail}}" width=300 />-->
       <!-- Page content -->
-      <div class="container-fluid mt--7">
-        <div class="row text-center">
-          <div id="" class="col-xl-6 offset-xl-3">
-            <div class="card shadow">
-              <div style="border-bottom: none;" class="card-header bg-transparent">
-                <div class="row align-items-center">
-                  <div class="col">
-                    <!--<h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>-->
-                    <h2 class="mb-0 text-center">Shoe Details</h2>
-                    <br />
-                    <a href="{{_global_.appData.shoeConfig.shoeViewerURL}}">{{_global_.appData.shoeConfig.shoeViewerURL}}</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                      <thead class="thead-light">
-                        <tr>
-                          <th scope="col">Name of Part</th>
-                          <th scope="col">Material Name</th>
-                          <th scope="col">Material Category</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{#each _global_.appData.shoeConfig.config}}
-                        <tr> 
-                          <td>
-                            {{@key}}
-                          </td>
-                          <td>
-                            {{this.name}}
-                          </td>
-                          <td>
-                            {{this.category}}
-                          </td>
-                        </tr>
-                        {{/each}}
-                      </tbody>
-                    </table>
-                  </div>
-              </div>
+      <div style="background-color: white;" class="container-fluid">
+        <div class="row">
+          <div style="background-image: url({{_global_.appData.shoeConfig.thumbnail}})" id="pdf-bg-hldr" class="col-md-9">
+
+          </div>
+          <div id="pdf-mat-list-hldr" class="col-md-3 p-0">
+            <h2 style="background-color: #5f5f5f; color: white; margin: 0 -3rem 2rem -3rem !important;" class="text-center p-3">Details</h2>
+
+            {{#each _global_.appData.shoeConfig.config}}
+            <div class="pdf-mat-item">
+              <span class="mat-name">{{this.category}} - {{this.name}}</span>
+              <div style="background-image: url('./assets/nextllogo.png')" class="img-hldr"></div>
             </div>
-            
+            {{/each}}
           </div>
         </div>
   
