@@ -1,0 +1,46 @@
+<div class="row text-center">
+    <div id="" class="col-xl-6 offset-xl-3">
+      <div class="card shadow">
+        <div style="border-bottom: none;" class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <!--<h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>-->
+              <h2 class="mb-0 text-center">Shoe Details</h2>
+              <br />
+              <a href="{{_global_.appData.shoeConfig.shoeViewerURL}}">{{_global_.appData.shoeConfig.shoeViewerURL}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Name of Part</th>
+                    <th scope="col">Material Name</th>
+                    <th scope="col">Material Category</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each _global_.appData.shoeConfig.config}}
+                  <tr> 
+                    <td>
+                      {{@key}}
+                    </td>
+                    <td>
+                      {{this.name}}
+                    </td>
+                    <td>
+                      {{this.category}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>

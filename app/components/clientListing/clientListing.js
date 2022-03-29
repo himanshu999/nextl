@@ -23,11 +23,12 @@ spa.$extend('clientListing', {
 
 		window.firebaseDB.collection("shoes").where("client", "==", appData.currentClientIndex).get().then((querySnapshot) => {
 			console.log(appData.currentClientIndex.toString());
+			appData.shoes = [];
 			querySnapshot.docs.forEach((doc) => {
 	
 				const shoe = { ...doc.data(), id: doc.id };
 	
-				appData.shoes = [];
+				
 				appData.shoes.push(shoe);
 	
 			})
